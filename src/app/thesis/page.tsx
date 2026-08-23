@@ -1,0 +1,102 @@
+import { getDb } from '@/lib/db';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export const metadata = {
+  title: 'Theses | Raja Viveka Vardhan Siluveru',
+  description: 'M.Tech and B.Tech thesis research in biomedical imaging, optical systems, and computational diagnostics.',
+};
+
+export default async function ThesisPage() {
+  const db = getDb();
+  const theses = db.prepare('SELECT * FROM theses ORDER BY sort_order ASC').all() as any[];
+
+  return (
+    <main className="min-h-screen bg-slate-950">
+      {/* Hero */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-950/20 to-transparent" />
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-6">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Academic Research
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Research <span className="text-cyan-400">Theses</span>
+          </h1>
+          <p className="text-xl text-slate-400 max-w-3xl">
+            M.Tech and B.Tech thesis research spanning biomedical imaging, optical instrumentation, and computational methods for disease detection.
+          </p>
+        </div>
+      </section>
+
+      {/* Theses */}
+      <section className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="space-y-8">
+          {theses.map((thesis: any) => (
+            <article key={thesis.id} className="bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-cyan-500/30 transition-colors">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                  {thesis.degree}
+                </span>
+                <span className="text-sm text-slate-500">{thesis.year}</span>
+              </div>
+
+              <h2 className="text-2xl font-bold text-white mb-3">{thesis.title}</h2>
+
+              <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                {thesis.institution}
+              </div>
+
+              <div className="flex items-center gap-2 text-sm text-slate-500 mb-6">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Supervisor: {thesis.supervisor}
+              </div>
+
+              {/* Key sections */}
+              <div className="space-y-4 mb-6">
+                <div>
+                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Research Problem</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.research_problem}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Methodology</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.methodology}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Key Contributions</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.key_contributions}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-emerald-400 mb-1">Results</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.results}</p>
+                </div>
+                {thesis.conclusions && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-400 mb-1">Conclusions</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{thesis.conclusions}</p>
+                  </div>
+                )}
+                {thesis.future_work && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-400 mb-1">Future Work</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">{thesis.future_work}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* PDF download removed per author request */}
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #e2e8f0;
+  --background: #020617;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+
+/* Academic heading typography */
+h1, h2, h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Body text uses Inter */
+p, li, span, td, th, label, input, textarea, select, button, a {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Ensure headings remain serif in nested contexts */
+.font-sans h1, .font-sans h2, .font-sans h3 {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Subtle grid pattern for hero sections */
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(99,102,241,0.06) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Research figure hover */
+.research-figure {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.research-figure:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* Prose styling for research content */
+.prose-research h1 { @apply text-3xl font-bold text-white mb-4; }
+.prose-research h2 { @apply text-2xl font-bold text-white mb-3 mt-8; }
+.prose-research h3 { @apply text-xl font-semibold text-white mb-2 mt-6; }
+.prose-research p { @apply text-slate-300 leading-relaxed mb-4; }
+.prose-research ul { @apply list-disc list-inside text-slate-300 mb-4 space-y-1; }
+.prose-research ol { @apply list-decimal list-inside text-slate-300 mb-4 space-y-1; }
+.prose-research code { @apply px-1.5 py-0.5 bg-slate-800 rounded text-indigo-300 text-sm font-mono; }
+.prose-research pre { @apply bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto mb-4; }
+.prose-research pre code { @apply bg-transparent p-0; }
+.prose-research blockquote { @apply border-l-4 border-indigo-500 pl-4 italic text-slate-400 mb-4; }
+.prose-research table { @apply w-full text-sm text-left mb-4; }
+.prose-research th { @apply px-4 py-2 bg-slate-800 text-white font-medium; }
+.prose-research td { @apply px-4 py-2 border-t border-slate-800 text-slate-300; }
+.prose-research img { @apply rounded-lg border border-slate-800 my-4; }
+.prose-research a { @apply text-indigo-400 hover:text-indigo-300 underline underline-offset-2; }
+.prose-research hr { @apply border-slate-800 my-8; }
+
+/* Caption text for figures */
+figcaption {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #f8fafc;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Video styling */
+video {
+  max-height: 480px;
+  object-fit: contain;
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

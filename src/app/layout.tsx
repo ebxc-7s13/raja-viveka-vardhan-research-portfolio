@@ -1,0 +1,61 @@
+import type { Metadata } from 'next';
+import { Inter, Source_Serif_4 } from 'next/font/google';
+import './globals.css';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const serif = Source_Serif_4({ subsets: ['latin'], variable: '--font-serif' });
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Raja Viveka Vardhan Siluveru — Biomedical Engineering Researcher',
+    template: '%s | Raja Viveka Vardhan Siluveru',
+  },
+  description: 'Biomedical Engineering Researcher developing label-free imaging systems, computational methods, and AI-based diagnostic tools for early disease detection. Research in autofluorescence imaging, deep learning, and non-invasive diagnostics.',
+  keywords: [
+    'biomedical engineering', 'oral cancer detection', 'autofluorescence imaging',
+    'deep learning', 'label-free diagnostics', 'optical imaging',
+    'non-invasive diagnostics', 'medical instrumentation', 'computational pathology',
+    'microgravity simulation', 'FASCANet', 'AFiS-Net',
+  ],
+  authors: [{ name: 'Raja Viveka Vardhan Siluveru' }],
+  creator: 'Raja Viveka Vardhan Siluveru',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Raja Viveka Vardhan Siluveru — Research Portfolio',
+    title: 'Raja Viveka Vardhan Siluveru — Biomedical Engineering Researcher',
+    description: 'Label-free imaging systems, computational methods, and AI diagnostics for early disease detection.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Raja Viveka Vardhan Siluveru — Biomedical Engineering Researcher',
+    description: 'Label-free imaging systems, computational methods, and AI diagnostics for early disease detection.',
+  },
+  robots: { index: true, follow: true },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; form-action 'self'"
+        />
+      </head>
+      <body className={`${inter.variable} ${serif.variable} font-sans antialiased`}>
+        <Navigation />
+        <div className="pt-16">
+          {children}
+        </div>
+        <Footer />
+      </body>
+    </html>
+  );
+}
