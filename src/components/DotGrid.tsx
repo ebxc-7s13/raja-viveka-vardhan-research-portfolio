@@ -146,7 +146,7 @@ export default function DotGrid() {
           }
           pulse = Math.min(pulse, 1);
 
-          let opacity = 0.08 + pulse * 0.25;
+          let opacity = 0.06 + pulse * 0.2;
           let radius = BASE_RADIUS;
 
           // Mouse hover
