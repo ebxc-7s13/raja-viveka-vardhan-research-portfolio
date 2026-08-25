@@ -43,8 +43,8 @@ const ALL_IMAGES = [
 ];
 
 const GRID_SIZE = 9;
-const FADE_DURATION = 1600;
-const SWAP_INTERVAL = 2600;
+const FADE_DURATION = 1800;
+const SWAP_INTERVAL = 3000;
 
 const INITIAL_IMAGES = ALL_IMAGES.slice(0, GRID_SIZE);
 
@@ -57,7 +57,6 @@ function shuffleArray(arr: string[]): string[] {
   return shuffled;
 }
 
-// Each cell: current visible image + incoming image during crossfade
 interface CellState {
   current: string;
   incoming: string | null;
@@ -90,7 +89,6 @@ export default function ImageCrossFade() {
     if (!mounted) return;
 
     intervalRef.current = setInterval(() => {
-      // Pick a random cell that isn't already fading
       setCells((prev) => {
         const candidates = prev
           .map((c, i) => ({ c, i }))
@@ -101,11 +99,9 @@ export default function ImageCrossFade() {
         const currentImages = prev.map((c) => c.current);
         const newImg = pickNewImage(currentImages);
 
-        // Start fade: set incoming
         const next = [...prev];
         next[idx] = { ...next[idx], incoming: newImg, fading: true };
 
-        // After fade completes, swap current and clear incoming
         setTimeout(() => {
           setCells((inner) => {
             const updated = [...inner];
@@ -124,35 +120,33 @@ export default function ImageCrossFade() {
   }, [mounted, pickNewImage]);
 
   return (
-    <div className="grid grid-cols-3 gap-2 aspect-square w-full max-w-lg rounded-2xl overflow-hidden border border-white/20">
+    <div className="grid grid-cols-3 gap-2 w-full rounded-2xl overflow-hidden border border-white/20" style={{ maxWidth: '520px', aspectRatio: '4 / 3' }}>
       {cells.map((cell, i) => (
         <div
           key={`cell-${i}`}
           className="relative overflow-hidden bg-white/5"
         >
-          {/* Current image — always visible */}
+          {/* Current image — stays fully visible */}
           <Image
             src={cell.current}
             alt={`Research image ${i + 1}`}
             fill
-            className={`object-cover transition-opacity ease-in-out ${
-              cell.fading ? 'opacity-0' : 'opacity-100'
-            }`}
-            style={{ transitionDuration: `${FADE_DURATION}ms` }}
-            sizes="(max-width: 768px) 33vw, 200px"
+            className="object-cover opacity-100"
+            sizes="(max-width: 768px) 33vw, 180px"
             unoptimized
           />
-          {/* Incoming image — fades in on top */}
+          {/* Incoming image — fades IN on top, current is never hidden */}
           {cell.fading && cell.incoming && (
             <Image
               src={cell.incoming}
               alt={`Research image ${i + 1}`}
               fill
-              className="object-cover absolute inset-0 opacity-0"
+              className="object-cover absolute inset-0"
               style={{
+                opacity: 0,
                 animation: `crossfadeIn ${FADE_DURATION}ms ease-in-out forwards`,
               }}
-              sizes="(max-width: 768px) 33vw, 200px"
+              sizes="(max-width: 768px) 33vw, 180px"
               unoptimized
             />
           )}

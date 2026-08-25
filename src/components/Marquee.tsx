@@ -8,22 +8,31 @@ interface MarqueeProps {
 }
 
 export default function Marquee({ direction = 'left' }: MarqueeProps) {
-  const text = MARQUEE_TEXT.repeat(3);
-  const animClass = direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right';
+  const text = MARQUEE_TEXT.repeat(4);
+  const isLeft = direction === 'left';
 
   return (
-    <div className="relative w-full overflow-hidden bg-white py-1.5 select-none z-50">
-      <div className={`flex whitespace-nowrap ${animClass}`}>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0">
+    <div
+      className="relative w-full overflow-hidden bg-white py-1.5 select-none z-50"
+      style={{ contain: 'layout' }}
+    >
+      <div
+        className="flex whitespace-nowrap"
+        style={{
+          width: 'max-content',
+          animation: `${isLeft ? 'marqueeLeft' : 'marqueeRight'} 35s linear infinite`,
+        }}
+      >
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
           {text}
         </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0">
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
           {text}
         </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0">
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
           {text}
         </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0">
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
           {text}
         </span>
       </div>
