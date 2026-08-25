@@ -1,6 +1,6 @@
 'use client';
 
-const MARQUEE_TEXT =
+const TEXT =
   '◆ BIOMEDICAL ENGINEERING ◆ ORAL CANCER DETECTION ◆ AUTOFLORESCENCE IMAGING ◆ DEEP LEARNING ◆ LABEL-FREE DIAGNOSTICS ◆ OPTICAL IMAGING ◆ NON-INVASIVE DIAGNOSTICS ◆ COMPUTATIONAL PATHOLOGY ◆ MICROGRAVITY SIMULATION ◆ FASCANET ◆ AFIS-NET ◆ ';
 
 interface MarqueeProps {
@@ -8,32 +8,23 @@ interface MarqueeProps {
 }
 
 export default function Marquee({ direction = 'left' }: MarqueeProps) {
-  const text = MARQUEE_TEXT.repeat(4);
+  const content = TEXT.repeat(6);
   const isLeft = direction === 'left';
 
   return (
-    <div
-      className="relative w-full overflow-hidden bg-white py-1.5 select-none z-50"
-      style={{ contain: 'layout' }}
-    >
+    <div className="w-full overflow-hidden bg-white py-1.5 z-50 select-none" style={{ position: 'relative' }}>
       <div
-        className="flex whitespace-nowrap"
         style={{
-          width: 'max-content',
-          animation: `${isLeft ? 'marqueeLeft' : 'marqueeRight'} 35s linear infinite`,
+          display: 'flex',
+          width: 'fit-content',
+          animation: `marquee-scroll ${isLeft ? 'normal' : 'reverse'} 40s linear infinite`,
         }}
       >
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
-          {text}
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase whitespace-nowrap">
+          {content}
         </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
-          {text}
-        </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
-          {text}
-        </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase shrink-0 pr-4">
-          {text}
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase whitespace-nowrap">
+          {content}
         </span>
       </div>
     </div>
