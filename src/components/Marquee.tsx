@@ -1,30 +1,32 @@
 'use client';
 
 const TEXT =
-  '◆ BIOMEDICAL ENGINEERING ◆ ORAL CANCER DETECTION ◆ AUTOFLORESCENCE IMAGING ◆ DEEP LEARNING ◆ LABEL-FREE DIAGNOSTICS ◆ OPTICAL IMAGING ◆ NON-INVASIVE DIAGNOSTICS ◆ COMPUTATIONAL PATHOLOGY ◆ MICROGRAVITY SIMULATION ◆ FASCANET ◆ AFIS-NET ◆ ';
+  ' ◆ BIOMEDICAL ENGINEERING ◆ ORAL CANCER DETECTION ◆ AUTOFLORESCENCE IMAGING ◆ DEEP LEARNING ◆ LABEL-FREE DIAGNOSTICS ◆ OPTICAL IMAGING ◆ NON-INVASIVE DIAGNOSTICS ◆ COMPUTATIONAL PATHOLOGY ◆ MICROGRAVITY SIMULATION ◆ FASCANET ◆ AFIS-NET ◆';
 
 interface MarqueeProps {
   direction?: 'left' | 'right';
 }
 
 export default function Marquee({ direction = 'left' }: MarqueeProps) {
-  const content = TEXT.repeat(6);
-  const isLeft = direction === 'left';
+  // Two identical halves — animation translates by -50% for seamless loop
+  const half = TEXT.repeat(8);
 
   return (
-    <div className="w-full overflow-hidden bg-white py-1.5 z-50 select-none" style={{ position: 'relative' }}>
+    <div
+      className="w-full bg-white py-1.5 z-50 select-none"
+      style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+    >
       <div
         style={{
-          display: 'flex',
-          width: 'fit-content',
-          animation: `marquee-scroll ${isLeft ? 'normal' : 'reverse'} 40s linear infinite`,
+          display: 'inline-flex',
+          animation: `marqueeScroll 45s linear infinite${direction === 'right' ? ' reverse' : ''}`,
         }}
       >
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase whitespace-nowrap">
-          {content}
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase">
+          {half}
         </span>
-        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase whitespace-nowrap">
-          {content}
+        <span className="text-[11px] font-mono font-bold tracking-brutal text-black uppercase">
+          {half}
         </span>
       </div>
     </div>

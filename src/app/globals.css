@@ -38,7 +38,7 @@ p, li, span, td, th, label, input, textarea, select, button, a {
 }
 
 /* === MARQUEE ANIMATION === */
-@keyframes marquee-scroll {
+@keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
