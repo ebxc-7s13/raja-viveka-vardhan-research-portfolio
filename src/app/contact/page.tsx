@@ -64,7 +64,7 @@ export default function ContactPage() {
             </svg>
             Contact
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
+          <h1 className="text-7xl md:text-8xl font-bold text-white mb-6">
             Get in <span className="text-emerald-400">Touch</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">

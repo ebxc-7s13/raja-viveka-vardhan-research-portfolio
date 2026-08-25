@@ -47,7 +47,7 @@ export default async function PublicationsPage({
             </svg>
             Publications
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
+          <h1 className="text-7xl md:text-8xl font-bold text-white mb-6">
             Publications & <span className="text-violet-400">Manuscripts</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
