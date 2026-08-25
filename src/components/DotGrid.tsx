@@ -146,7 +146,7 @@ export default function DotGrid() {
           }
           pulse = Math.min(pulse, 1);
 
-          let opacity = 0.04 + pulse * 0.16;
+          let opacity = 0.046 + pulse * 0.184;
           let radius = BASE_RADIUS;
 
           // Mouse hover
@@ -155,8 +155,8 @@ export default function DotGrid() {
           const distMouse = Math.sqrt(dx * dx + dy * dy);
           if (distMouse < MOUSE_RADIUS) {
             const factor = 1 - distMouse / MOUSE_RADIUS;
-            radius = BASE_RADIUS + factor * 1.5;
-            opacity = Math.min(opacity + factor * 0.15, 0.35);
+            radius = BASE_RADIUS + factor * 1.725;
+            opacity = Math.min(opacity + factor * 0.1725, 0.40);
           }
 
           ctx.beginPath();
@@ -185,8 +185,8 @@ export default function DotGrid() {
             if (dist < MOUSE_RADIUS) {
               const factor = 1 - dist / MOUSE_RADIUS;
               ctx.beginPath();
-              ctx.arc(x, y, 0.6 + factor * 1.0, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(255, 255, 255, ${factor * 0.18})`;
+              ctx.arc(x, y, 0.69 + factor * 1.15, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${factor * 0.207})`;
               ctx.fill();
             }
           }
