@@ -59,8 +59,8 @@ export default function DotGrid() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const DOT_SPACING = 36;
-    const BASE_RADIUS = 1;
+    const DOT_SPACING = 24;
+    const BASE_RADIUS = 1.2;
     const MOUSE_RADIUS = 160;
     const EXTRA_DOT_SPACING = 12;
     const SHAPES: Patch['shape'][] = ['circle', 'rect', 'diamond'];
@@ -69,17 +69,17 @@ export default function DotGrid() {
       const w = canvas!.width || 2000;
       const h = canvas!.height || 2000;
       const patches: Patch[] = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 15; i++) {
         const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
         patches.push({
           cx: Math.random() * w,
           cy: Math.random() * h,
-          radius: 80 + Math.random() * 200,
-          speed: 0.2 + Math.random() * 0.8,
+          radius: 120 + Math.random() * 280,
+          speed: 0.3 + Math.random() * 0.9,
           phase: Math.random() * Math.PI * 2,
           shape,
-          w: 100 + Math.random() * 250,
-          h: 80 + Math.random() * 200,
+          w: 120 + Math.random() * 300,
+          h: 100 + Math.random() * 250,
         });
       }
       return patches;
@@ -146,7 +146,7 @@ export default function DotGrid() {
           }
           pulse = Math.min(pulse, 1);
 
-          let opacity = 0.046 + pulse * 0.184;
+          let opacity = 0.08 + pulse * 0.25;
           let radius = BASE_RADIUS;
 
           // Mouse hover
