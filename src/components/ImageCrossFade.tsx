@@ -43,10 +43,9 @@ const ALL_IMAGES = [
 ];
 
 const GRID_SIZE = 9;
-const FADE_DURATION = 1800;
-const SWAP_INTERVAL = 2800;
+const FADE_DURATION = 1600;
+const SWAP_INTERVAL = 2600;
 
-// Deterministic first 9 images for SSR — no Math.random()
 const INITIAL_IMAGES = ALL_IMAGES.slice(0, GRID_SIZE);
 
 function shuffleArray(arr: string[]): string[] {
@@ -58,53 +57,64 @@ function shuffleArray(arr: string[]): string[] {
   return shuffled;
 }
 
+// Each cell: current visible image + incoming image during crossfade
+interface CellState {
+  current: string;
+  incoming: string | null;
+  fading: boolean;
+}
+
+function initCells(imgs: string[]): CellState[] {
+  return imgs.map((src) => ({ current: src, incoming: null, fading: false }));
+}
+
 export default function ImageCrossFade() {
-  // Deterministic initial state for SSR hydration match
-  const [images, setImages] = useState<string[]>(INITIAL_IMAGES);
-  const [fadingIndex, setFadingIndex] = useState<number | null>(null);
-  const [nextImage, setNextImage] = useState<string>('');
+  const [cells, setCells] = useState<CellState[]>(() => initCells(INITIAL_IMAGES));
   const [mounted, setMounted] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Shuffle once on client mount — after hydration is complete
   useEffect(() => {
-    setImages(shuffleArray(ALL_IMAGES).slice(0, GRID_SIZE));
+    setCells(initCells(shuffleArray(ALL_IMAGES).slice(0, GRID_SIZE)));
     setMounted(true);
   }, []);
 
-  const pickNewImage = useCallback(
-    (currentImages: string[]) => {
-      const currentSet = new Set(currentImages);
-      const available = ALL_IMAGES.filter((img) => !currentSet.has(img));
-      if (available.length === 0)
-        return ALL_IMAGES[Math.floor(Math.random() * ALL_IMAGES.length)];
-      return available[Math.floor(Math.random() * available.length)];
-    },
-    []
-  );
+  const pickNewImage = useCallback((currentImages: string[]) => {
+    const currentSet = new Set(currentImages);
+    const available = ALL_IMAGES.filter((img) => !currentSet.has(img));
+    if (available.length === 0)
+      return ALL_IMAGES[Math.floor(Math.random() * ALL_IMAGES.length)];
+    return available[Math.floor(Math.random() * available.length)];
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;
 
     intervalRef.current = setInterval(() => {
-      setImages((prev) => {
-        const idx = Math.floor(Math.random() * GRID_SIZE);
-        const newImg = pickNewImage(prev);
+      // Pick a random cell that isn't already fading
+      setCells((prev) => {
+        const candidates = prev
+          .map((c, i) => ({ c, i }))
+          .filter(({ c }) => !c.fading);
+        if (candidates.length === 0) return prev;
 
-        setFadingIndex(idx);
-        setNextImage(newImg);
+        const { i: idx } = candidates[Math.floor(Math.random() * candidates.length)];
+        const currentImages = prev.map((c) => c.current);
+        const newImg = pickNewImage(currentImages);
 
+        // Start fade: set incoming
+        const next = [...prev];
+        next[idx] = { ...next[idx], incoming: newImg, fading: true };
+
+        // After fade completes, swap current and clear incoming
         setTimeout(() => {
-          setImages((inner) => {
-            const next = [...inner];
-            next[idx] = newImg;
-            return next;
+          setCells((inner) => {
+            const updated = [...inner];
+            updated[idx] = { current: newImg, incoming: null, fading: false };
+            return updated;
           });
-          setFadingIndex(null);
-          setNextImage('');
         }, FADE_DURATION);
 
-        return prev; // don't change yet — swap happens in the timeout
+        return next;
       });
     }, SWAP_INTERVAL);
 
@@ -114,39 +124,40 @@ export default function ImageCrossFade() {
   }, [mounted, pickNewImage]);
 
   return (
-    <div className="grid grid-cols-3 gap-2 aspect-square w-full max-w-md rounded-2xl overflow-hidden border border-slate-800">
-      {images.map((src, i) => {
-        const isFading = fadingIndex === i;
-        return (
-          <div
-            key={`${i}-${src}`}
-            className="relative overflow-hidden bg-slate-900"
-          >
-            {/* Current image */}
+    <div className="grid grid-cols-3 gap-2 aspect-square w-full max-w-lg rounded-2xl overflow-hidden border border-white/20">
+      {cells.map((cell, i) => (
+        <div
+          key={`cell-${i}`}
+          className="relative overflow-hidden bg-white/5"
+        >
+          {/* Current image — always visible */}
+          <Image
+            src={cell.current}
+            alt={`Research image ${i + 1}`}
+            fill
+            className={`object-cover transition-opacity ease-in-out ${
+              cell.fading ? 'opacity-0' : 'opacity-100'
+            }`}
+            style={{ transitionDuration: `${FADE_DURATION}ms` }}
+            sizes="(max-width: 768px) 33vw, 200px"
+            unoptimized
+          />
+          {/* Incoming image — fades in on top */}
+          {cell.fading && cell.incoming && (
             <Image
-              src={src}
+              src={cell.incoming}
               alt={`Research image ${i + 1}`}
               fill
-              className={`object-cover transition-opacity duration-[1800ms] ease-in-out ${
-                isFading ? 'opacity-0' : 'opacity-100'
-              }`}
-              sizes="(max-width: 768px) 33vw, 160px"
+              className="object-cover absolute inset-0 opacity-0"
+              style={{
+                animation: `crossfadeIn ${FADE_DURATION}ms ease-in-out forwards`,
+              }}
+              sizes="(max-width: 768px) 33vw, 200px"
               unoptimized
             />
-            {/* Incoming image */}
-            {isFading && nextImage && (
-              <Image
-                src={nextImage}
-                alt={`Research image ${i + 1}`}
-                fill
-                className="object-cover absolute inset-0 animate-fadeIn"
-                sizes="(max-width: 768px) 33vw, 160px"
-                unoptimized
-              />
-            )}
-          </div>
-        );
-      })}
+          )}
+        </div>
+      ))}
     </div>
   );
 }

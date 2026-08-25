@@ -59,12 +59,9 @@ p, li, span, td, th, label, input, textarea, select, button, a {
 }
 
 /* === CROSS-FADE ANIMATION === */
-@keyframes fadeIn {
+@keyframes crossfadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-.animate-fadeIn {
-  animation: fadeIn 1.8s ease-in-out forwards;
 }
 
 /* === BRUTALIST LINE DECORATIONS === */
