@@ -38,12 +38,20 @@ function distToShape(
   }
 }
 
+interface TrailPoint {
+  x: number;
+  y: number;
+  life: number; // 1 = fresh, 0 = dead
+}
+
 export default function DotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
   const patchesRef = useRef<Patch[]>([]);
+  const trailRef = useRef<TrailPoint[]>([]);
+  const lastTrailRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -90,6 +98,17 @@ export default function DotGrid() {
     function onMouse(e: MouseEvent) {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
+
+      // Add trail point every 16ms (~60fps)
+      const now = performance.now();
+      if (now - lastTrailRef.current > 16) {
+        lastTrailRef.current = now;
+        trailRef.current.push({ x: e.clientX, y: e.clientY, life: 1 });
+        // Keep max 60 points (~1 second of trail)
+        if (trailRef.current.length > 60) {
+          trailRef.current.shift();
+        }
+      }
     }
     window.addEventListener('mousemove', onMouse);
     window.addEventListener('mouseleave', () => {
@@ -172,6 +191,29 @@ export default function DotGrid() {
             }
           }
         }
+      }
+
+      // === NEON GREEN MOUSE TRAIL ===
+      const trail = trailRef.current;
+      for (let i = trail.length - 1; i >= 0; i--) {
+        const pt = trail[i];
+        pt.life -= 0.018; // fade over ~1 second
+        if (pt.life <= 0) {
+          trail.splice(i, 1);
+          continue;
+        }
+        const alpha = pt.life * 0.7;
+        const radius = 2 + pt.life * 4;
+        // Glow
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, radius + 6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(57, 255, 20, ${alpha * 0.2})`;
+        ctx.fill();
+        // Core
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(57, 255, 20, ${alpha})`;
+        ctx.fill();
       }
 
       animRef.current = requestAnimationFrame(draw);
