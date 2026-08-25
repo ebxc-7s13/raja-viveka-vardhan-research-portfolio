@@ -74,12 +74,12 @@ export default function DotGrid() {
         patches.push({
           cx: Math.random() * w,
           cy: Math.random() * h,
-          radius: 120 + Math.random() * 280,
+          radius: 60 + Math.random() * 120,
           speed: 0.3 + Math.random() * 0.9,
           phase: Math.random() * Math.PI * 2,
           shape,
-          w: 120 + Math.random() * 300,
-          h: 100 + Math.random() * 250,
+          w: 80 + Math.random() * 160,
+          h: 60 + Math.random() * 140,
         });
       }
       return patches;
