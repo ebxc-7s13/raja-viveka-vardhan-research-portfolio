@@ -66,45 +66,30 @@ export default async function AboutPage() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/20 to-transparent" />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-6">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                About the Researcher
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                <span className="text-indigo-400">Siluveru</span>
-                <br />
-                Raja Viveka Vardhan
-              </h1>
-              <p className="text-lg text-slate-400 leading-relaxed mb-6">
-                Biomedical Engineering Researcher working at the intersection of optical imaging, 
-                AI/ML, and non-invasive diagnostics. M.Tech Gold Medallist at IIEST Shibpur 
-                with a focus on label-free oral cancer detection using multispectral imaging 
-                and deep learning.
-              </p>
-              <p className="text-slate-400 leading-relaxed">
-                My research addresses the critical need for accessible, non-invasive diagnostic 
-                tools — particularly for resource-limited settings where conventional biopsy-based 
-                methods are impractical. I develop complete experimental systems from hardware 
-                instrumentation through computational analysis.
-              </p>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-6">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              About the Researcher
             </div>
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-slate-800 bg-slate-900">
-                <Image
-                  src="/research/microscope/Screenshot 2026-08-21 170928.png"
-                  alt="Multispectral imaging system"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center border-4 border-slate-950">
-                <span className="text-3xl">🔬</span>
-              </div>
-            </div>
+            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
+              <span className="text-indigo-400">Siluveru</span>
+              <br />
+              Raja Viveka Vardhan
+            </h1>
+            <p className="text-xl text-slate-400 leading-relaxed mb-6 max-w-3xl mx-auto">
+              Biomedical Engineering Researcher working at the intersection of optical imaging, 
+              AI/ML, and non-invasive diagnostics. M.Tech Gold Medallist at IIEST Shibpur 
+              with a focus on label-free oral cancer detection using multispectral imaging 
+              and deep learning.
+            </p>
+            <p className="text-slate-400 leading-relaxed max-w-3xl mx-auto">
+              My research addresses the critical need for accessible, non-invasive diagnostic 
+              tools — particularly for resource-limited settings where conventional biopsy-based 
+              methods are impractical. I develop complete experimental systems from hardware 
+              instrumentation through computational analysis.
+            </p>
           </div>
         </div>
       </section>

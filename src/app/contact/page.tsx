@@ -58,19 +58,20 @@ export default function ContactPage() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 to-transparent" />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+          <div className="text-center"><div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             Contact
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
             Get in <span className="text-emerald-400">Touch</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-3xl">
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Interested in research collaboration, have questions about my work, or want to discuss 
             biomedical imaging and diagnostics? I&apos;d love to hear from you.
           </p>
+          </div>
         </div>
       </section>
 

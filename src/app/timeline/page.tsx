@@ -62,18 +62,19 @@ export default async function TimelinePage() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-violet-950/20 to-transparent" />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-medium mb-6">
+          <div className="text-center"><div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-medium mb-6">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Research Journey
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
             Research <span className="text-violet-400">Timeline</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-3xl">
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             A chronological view of academic milestones, research achievements, publications, and technological innovations.
           </p>
+          </div>
         </div>
       </section>
 

@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         <Link href="/" className="text-indigo-400 hover:text-indigo-300 text-sm mb-8 inline-block">
           ← Back to Home
         </Link>
-        <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+        <h1 className="text-6xl md:text-7xl font-bold text-white mb-8 text-center">Privacy Policy</h1>
         <div className="space-y-6 text-slate-400">
           <p>
             <strong className="text-white">Last updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}

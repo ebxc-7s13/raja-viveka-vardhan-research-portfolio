@@ -41,13 +41,15 @@ export default async function ResearchPage({
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/20 via-transparent to-transparent" />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <div className="text-center">
+          <h1 className="text-6xl md:text-7xl font-bold text-white mb-4">
             Research <span className="text-indigo-400">Projects</span>
           </h1>
-          <p className="text-lg text-slate-400 max-w-2xl">
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Each project is presented as a complete case study — from problem formulation
             through methodology, experimentation, and results.
           </p>
+          </div>
         </div>
       </section>
 
