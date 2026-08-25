@@ -1,6 +1,7 @@
 import { getDb } from '@/lib/db';
 import Link from 'next/link';
 import Image from 'next/image';
+import ImageCrossFade from '@/components/ImageCrossFade';
 
 export default function Home() {
   const db = getDb();
@@ -33,10 +34,11 @@ export default function Home() {
                 Biomedical Engineering Researcher
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                Raja Viveka<br />
                 <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                  Vardhan Siluveru
+                  Siluveru
                 </span>
+                <br />
+                Raja Viveka Vardhan
               </h1>
               <p className="text-xl text-slate-400 leading-relaxed mb-8 max-w-lg">
                 Engineering researcher developing label-free imaging systems and 
@@ -76,17 +78,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Hero Image */}
-            <div className="relative hidden lg:block">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-slate-800">
-                <Image
-                  src="/research/microscope/system-overview.jpg"
-                  alt="Multispectral imaging system for oral cancer detection"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
+            {/* Hero Image Grid */}
+            <div className="relative hidden lg:flex items-center justify-center">
+              <ImageCrossFade />
               {/* Floating stats */}
               <div className="absolute -bottom-6 -left-6 bg-slate-900/90 backdrop-blur-xl rounded-xl border border-slate-800 p-4">
                 <div className="text-3xl font-bold text-white">2+</div>

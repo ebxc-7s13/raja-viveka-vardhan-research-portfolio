@@ -53,10 +53,10 @@ export function validateCsrfToken(
   sessionToken: string
 ): boolean {
   if (!token || !sessionToken) return false;
-  return crypto.timingSafeEqual(
-    Buffer.from(token, 'hex'),
-    Buffer.from(sessionToken, 'hex')
-  );
+  const tokenBuf = Buffer.from(token, 'hex');
+  const sessionBuf = Buffer.from(sessionToken, 'hex');
+  if (tokenBuf.length !== sessionBuf.length) return false;
+  return crypto.timingSafeEqual(tokenBuf, sessionBuf);
 }
 
 // Content-Type validation

@@ -75,8 +75,9 @@ export default async function AboutPage() {
                 About the Researcher
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Raja Viveka<br />
-                <span className="text-indigo-400">Vardhan Siluveru</span>
+                <span className="text-indigo-400">Siluveru</span>
+                <br />
+                Raja Viveka Vardhan
               </h1>
               <p className="text-lg text-slate-400 leading-relaxed mb-6">
                 Biomedical Engineering Researcher working at the intersection of optical imaging, 
@@ -94,7 +95,7 @@ export default async function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-slate-800 bg-slate-900">
                 <Image
-                  src="/research/microscope/system-overview.jpg"
+                  src="/research/microscope/Screenshot 2026-08-21 170928.png"
                   alt="Multispectral imaging system"
                   fill
                   className="object-cover"

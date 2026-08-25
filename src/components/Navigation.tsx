@@ -30,7 +30,7 @@ export default function Navigation() {
               <span className="text-white font-bold text-sm">SR</span>
             </div>
             <span className="font-semibold text-white group-hover:text-indigo-400 transition-colors hidden sm:block">
-              Raja V. Vardhan
+              Siluveru R. V.
             </span>
           </Link>
 

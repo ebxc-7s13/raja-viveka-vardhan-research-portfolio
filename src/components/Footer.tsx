@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">SR</span>
               </div>
-              <span className="font-semibold text-white">Raja Viveka Vardhan Siluveru</span>
+              <span className="font-semibold text-white">Siluveru Raja Viveka Vardhan</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-md">
               Biomedical Engineering Researcher working at the intersection of optical imaging, 
@@ -45,7 +45,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} Raja Viveka Vardhan Siluveru. All rights reserved.
+            © 2026 Raja Viveka Vardhan Siluveru. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="text-sm text-slate-500 hover:text-slate-400 transition-colors">Privacy</Link>
