@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${spaceGrotesk.variable} ${jetbrains.variable} font-sans antialiased`}>
         <DotGrid />
-        <Marquee direction="left" />
+        <Marquee direction="left" sticky />
         <Navigation />
         <div className="pt-16">
           {children}

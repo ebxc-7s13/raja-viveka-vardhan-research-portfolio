@@ -1,19 +1,15 @@
 'use client';
 
 const TEXT =
-  '◆ BIOMEDICAL ENGINEERING ◆ ORAL CANCER DETECTION ◆ AUTOFLORESCENCE IMAGING ◆ DEEP LEARNING ◆ LABEL-FREE DIAGNOSTICS ◆ OPTICAL IMAGING ◆ NON-INVASIVE DIAGNOSTICS ◆ COMPUTATIONAL PATHOLOGY ◆ MICROGRAVITY SIMULATION ◆ FASCANET ◆ AFIS-NET ◆';
+  ' ◆ BIOMEDICAL ENGINEERING ◆ ORAL CANCER DETECTION ◆ AUTOFLORESCENCE IMAGING ◆ DEEP LEARNING ◆ LABEL-FREE DIAGNOSTICS ◆ OPTICAL IMAGING ◆ NON-INVASIVE DIAGNOSTICS ◆ COMPUTATIONAL PATHOLOGY ◆ MICROGRAVITY SIMULATION ◆ FASCANET ◆ AFIS-NET ◆';
 
 interface MarqueeProps {
   direction?: 'left' | 'right';
+  sticky?: boolean;
 }
 
-export default function Marquee({ direction = 'left' }: MarqueeProps) {
+export default function Marquee({ direction = 'left', sticky = false }: MarqueeProps) {
   const half = TEXT.repeat(6);
-
-  // One word ≈ 20 chars, ~12px per char at 11px font = ~240px per word
-  // 300ms per word → 240px / 0.3s = 800px/s
-  // -50% of ~14400px = -7200px → 7200/800 = 9s for one cycle
-  // Speed: 9s for -50%, so we use 9s duration
   const animName = direction === 'left' ? 'scrollLeft' : 'scrollRight';
 
   return (
@@ -24,10 +20,11 @@ export default function Marquee({ direction = 'left' }: MarqueeProps) {
         backgroundColor: 'white',
         paddingTop: '6px',
         paddingBottom: '6px',
-        zIndex: 50,
+        zIndex: 51,
         userSelect: 'none',
         whiteSpace: 'nowrap',
-        position: 'relative',
+        position: sticky ? 'sticky' : 'relative',
+        top: sticky ? '0' : undefined,
       }}
     >
       <div
