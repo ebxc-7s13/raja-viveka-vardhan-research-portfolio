@@ -193,27 +193,37 @@ export default function DotGrid() {
         }
       }
 
-      // === NEON GREEN MOUSE TRAIL ===
+      // === NEON GREEN MOUSE TRAIL (LINE) ===
       const trail = trailRef.current;
+      // Fade and remove dead points
       for (let i = trail.length - 1; i >= 0; i--) {
-        const pt = trail[i];
-        pt.life -= 0.018; // fade over ~1 second
-        if (pt.life <= 0) {
-          trail.splice(i, 1);
-          continue;
+        trail[i].life -= 0.018;
+        if (trail[i].life <= 0) trail.splice(i, 1);
+      }
+      if (trail.length > 1) {
+        // Draw line segments with varying opacity
+        for (let i = 1; i < trail.length; i++) {
+          const a = trail[i - 1];
+          const b = trail[i];
+          const alpha = b.life * 0.8;
+          const width = 1 + b.life * 3;
+          // Glow layer
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(57, 255, 20, ${alpha * 0.3})`;
+          ctx.lineWidth = width + 6;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+          // Core layer
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(57, 255, 20, ${alpha})`;
+          ctx.lineWidth = width;
+          ctx.lineCap = 'round';
+          ctx.stroke();
         }
-        const alpha = pt.life * 0.7;
-        const radius = 2 + pt.life * 4;
-        // Glow
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, radius + 6, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(57, 255, 20, ${alpha * 0.2})`;
-        ctx.fill();
-        // Core
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(57, 255, 20, ${alpha})`;
-        ctx.fill();
       }
 
       animRef.current = requestAnimationFrame(draw);
