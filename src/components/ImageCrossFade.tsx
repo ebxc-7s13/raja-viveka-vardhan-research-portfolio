@@ -43,8 +43,11 @@ const ALL_IMAGES = [
 ];
 
 const GRID_SIZE = 9;
-const FADE_DURATION = 1800; // ms for crossfade
-const SWAP_INTERVAL = 2800; // ms between swaps
+const FADE_DURATION = 1800;
+const SWAP_INTERVAL = 2800;
+
+// Deterministic first 9 images for SSR — no Math.random()
+const INITIAL_IMAGES = ALL_IMAGES.slice(0, GRID_SIZE);
 
 function shuffleArray(arr: string[]): string[] {
   const shuffled = [...arr];
@@ -55,51 +58,60 @@ function shuffleArray(arr: string[]): string[] {
   return shuffled;
 }
 
-function pickNineUnique(): string[] {
-  const shuffled = shuffleArray(ALL_IMAGES);
-  return shuffled.slice(0, GRID_SIZE);
-}
-
 export default function ImageCrossFade() {
-  const [images, setImages] = useState<string[]>(() => pickNineUnique());
+  // Deterministic initial state for SSR hydration match
+  const [images, setImages] = useState<string[]>(INITIAL_IMAGES);
   const [fadingIndex, setFadingIndex] = useState<number | null>(null);
   const [nextImage, setNextImage] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const usedImagesRef = useRef<Set<string>>(new Set(ALL_IMAGES));
 
-  const pickNewImage = useCallback(() => {
-    // Get images currently displayed
-    const currentSet = new Set(images);
-    // Available = all minus currently shown
-    const available = ALL_IMAGES.filter((img) => !currentSet.has(img));
-    if (available.length === 0) return ALL_IMAGES[Math.floor(Math.random() * ALL_IMAGES.length)];
-    return available[Math.floor(Math.random() * available.length)];
-  }, [images]);
+  // Shuffle once on client mount — after hydration is complete
+  useEffect(() => {
+    setImages(shuffleArray(ALL_IMAGES).slice(0, GRID_SIZE));
+    setMounted(true);
+  }, []);
+
+  const pickNewImage = useCallback(
+    (currentImages: string[]) => {
+      const currentSet = new Set(currentImages);
+      const available = ALL_IMAGES.filter((img) => !currentSet.has(img));
+      if (available.length === 0)
+        return ALL_IMAGES[Math.floor(Math.random() * ALL_IMAGES.length)];
+      return available[Math.floor(Math.random() * available.length)];
+    },
+    []
+  );
 
   useEffect(() => {
+    if (!mounted) return;
+
     intervalRef.current = setInterval(() => {
-      const idx = Math.floor(Math.random() * GRID_SIZE);
-      const newImg = pickNewImage();
+      setImages((prev) => {
+        const idx = Math.floor(Math.random() * GRID_SIZE);
+        const newImg = pickNewImage(prev);
 
-      setFadingIndex(idx);
-      setNextImage(newImg);
+        setFadingIndex(idx);
+        setNextImage(newImg);
 
-      // After fade completes, swap the image and clear fading state
-      setTimeout(() => {
-        setImages((prev) => {
-          const next = [...prev];
-          next[idx] = newImg;
-          return next;
-        });
-        setFadingIndex(null);
-        setNextImage('');
-      }, FADE_DURATION);
+        setTimeout(() => {
+          setImages((inner) => {
+            const next = [...inner];
+            next[idx] = newImg;
+            return next;
+          });
+          setFadingIndex(null);
+          setNextImage('');
+        }, FADE_DURATION);
+
+        return prev; // don't change yet — swap happens in the timeout
+      });
     }, SWAP_INTERVAL);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [pickNewImage]);
+  }, [mounted, pickNewImage]);
 
   return (
     <div className="grid grid-cols-3 gap-2 aspect-square w-full max-w-md rounded-2xl overflow-hidden border border-slate-800">
