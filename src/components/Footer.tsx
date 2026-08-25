@@ -2,54 +2,60 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/50">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <footer className="bg-black border-t border-white/20">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SR</span>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-white flex items-center justify-center">
+                <span className="text-black font-mono font-bold text-xs">SV</span>
               </div>
-              <span className="font-semibold text-white">Siluveru Raja Viveka Vardhan</span>
+              <span className="font-bold text-white text-sm tracking-brutal uppercase">
+                Siluveru Raja Viveka Vardhan
+              </span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-md">
-              Biomedical Engineering Researcher working at the intersection of optical imaging, 
-              AI/ML, and non-invasive diagnostics. Developing label-free computational methods 
-              for early disease detection.
+            <p className="text-white/50 text-sm leading-relaxed max-w-md font-mono">
+              Biomedical Engineering Researcher. Label-free imaging, computational methods,
+              early disease detection.
             </p>
           </div>
 
           {/* Research */}
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Research</h3>
+            <h3 className="text-xs font-mono font-bold text-white/40 uppercase tracking-brutal mb-4">
+              [ RESEARCH ]
+            </h3>
             <ul className="space-y-2">
-              <li><Link href="/research" className="text-sm text-slate-400 hover:text-white transition-colors">Projects</Link></li>
-              <li><Link href="/publications" className="text-sm text-slate-400 hover:text-white transition-colors">Publications</Link></li>
-              <li><Link href="/thesis" className="text-sm text-slate-400 hover:text-white transition-colors">Theses</Link></li>
-              <li><Link href="/patents" className="text-sm text-slate-400 hover:text-white transition-colors">Patents & Technology</Link></li>
+              <li><Link href="/research" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Projects</Link></li>
+              <li><Link href="/publications" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Publications</Link></li>
+              <li><Link href="/thesis" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Theses</Link></li>
+              <li><Link href="/patents" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Patents</Link></li>
             </ul>
           </div>
 
           {/* Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Connect</h3>
+            <h3 className="text-xs font-mono font-bold text-white/40 uppercase tracking-brutal mb-4">
+              [ CONNECT ]
+            </h3>
             <ul className="space-y-2">
-              <li><Link href="/about" className="text-sm text-slate-400 hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/timeline" className="text-sm text-slate-400 hover:text-white transition-colors">Timeline</Link></li>
-              <li><Link href="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">Research Notes</Link></li>
-              <li><Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/about" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ About</Link></li>
+              <li><Link href="/timeline" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Timeline</Link></li>
+              <li><Link href="/blog" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Notes</Link></li>
+              <li><Link href="/contact" className="text-sm text-white/60 hover:text-white transition-colors font-mono">→ Contact</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-slate-500">
-            © 2026 Raja Viveka Vardhan Siluveru. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-white/30 font-mono uppercase tracking-brutal">
+            © 2026 Siluveru R. V. — All rights reserved
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-sm text-slate-500 hover:text-slate-400 transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-sm text-slate-500 hover:text-slate-400 transition-colors">Terms</Link>
+            <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors font-mono">Privacy</Link>
+            <span className="text-white/20">|</span>
+            <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors font-mono">Terms</Link>
           </div>
         </div>
       </div>

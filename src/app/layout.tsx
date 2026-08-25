@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter, Source_Serif_4 } from 'next/font/google';
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Marquee from '@/components/Marquee';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const serif = Source_Serif_4({ subsets: ['latin'], variable: '--font-serif' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', weight: ['400', '500', '600', '700'] });
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', weight: ['400', '500', '700'] });
 
 export const metadata: Metadata = {
   title: {
@@ -39,12 +40,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${inter.variable} ${serif.variable} font-sans antialiased`}>
+      <body suppressHydrationWarning className={`${spaceGrotesk.variable} ${jetbrains.variable} font-sans antialiased`}>
+        <Marquee direction="left" />
         <Navigation />
         <div className="pt-16">
           {children}
         </div>
         <Footer />
+        <Marquee direction="right" />
       </body>
     </html>
   );
