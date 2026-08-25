@@ -4,6 +4,7 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Marquee from '@/components/Marquee';
+import DotGrid from '@/components/DotGrid';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', weight: ['400', '500', '600', '700'] });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', weight: ['400', '500', '700'] });
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${spaceGrotesk.variable} ${jetbrains.variable} font-sans antialiased`}>
+        <DotGrid />
         <Marquee direction="left" />
         <Navigation />
         <div className="pt-16">

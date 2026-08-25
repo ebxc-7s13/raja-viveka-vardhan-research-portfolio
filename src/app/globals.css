@@ -48,6 +48,16 @@ p, li, span, td, th, label, input, textarea, select, button, a {
   100% { transform: translateX(0); }
 }
 
+.animate-marquee-left {
+  animation: marqueeLeft 30s linear infinite;
+  width: max-content;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight 30s linear infinite;
+  width: max-content;
+}
+
 /* === CROSS-FADE ANIMATION === */
 @keyframes fadeIn {
   from { opacity: 0; }
