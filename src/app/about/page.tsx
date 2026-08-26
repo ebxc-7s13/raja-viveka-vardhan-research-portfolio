@@ -1,6 +1,7 @@
 import { getDb } from '@/lib/db';
 import Image from 'next/image';
 import ResearchCarousel from '@/components/ResearchCarousel';
+import GlassTitle from '@/components/GlassTitle';
 
 export const metadata = {
   title: 'About | Raja Viveka Vardhan Siluveru — Biomedical Engineering Researcher',
@@ -97,7 +98,7 @@ export default async function AboutPage() {
 
       {/* Academic Background */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold text-white mb-12">Academic Background</h2>
+        <GlassTitle><h2 className="text-3xl font-bold text-white mb-12">Academic Background</h2></GlassTitle>
         <div className="space-y-6">
           <div className="bg-slate-900/50 rounded-2xl border border-slate-800 p-8">
             <div className="flex items-start gap-4">
@@ -141,7 +142,7 @@ export default async function AboutPage() {
       {themes.length > 0 && (
         <section className="py-20 border-t border-slate-800/50 overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-white mb-4 text-center">Research Themes</h2>
+            <GlassTitle><h2 className="text-3xl font-bold text-white mb-4 text-center">Research Themes</h2></GlassTitle>
             <p className="text-slate-500 text-sm text-center mb-8 font-mono">Drag or use ← → arrow keys to explore</p>
           </div>
           <ResearchCarousel themes={themes} />
@@ -150,7 +151,7 @@ export default async function AboutPage() {
 
       {/* Technical Expertise */}
       <section className="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800/50">
-        <h2 className="text-3xl font-bold text-white mb-12">Technical Expertise</h2>
+        <GlassTitle><h2 className="text-3xl font-bold text-white mb-12">Technical Expertise</h2></GlassTitle>
         <div className="grid md:grid-cols-2 gap-8">
           {Object.entries(skillGroups).map(([category, categorySkills]) => (
             <div key={category} className="bg-slate-900/50 rounded-2xl border border-slate-800 p-6">
@@ -181,7 +182,7 @@ export default async function AboutPage() {
 
       {/* Research Philosophy */}
       <section className="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800/50">
-        <div className="bg-gradient-to-br from-indigo-950/30 to-violet-950/30 rounded-2xl border border-indigo-500/20 p-12 text-center">
+        <div data-day-philosophy className="bg-gradient-to-br from-indigo-950/30 to-violet-950/30 rounded-2xl border border-indigo-500/20 p-12 text-center">
           <svg className="w-12 h-12 text-indigo-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>

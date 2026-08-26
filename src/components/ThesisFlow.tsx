@@ -254,6 +254,7 @@ export default function ThesisFlow({ thesis }: { thesis: ThesisData }) {
                     }}
                   >
                     <div
+                      data-day-card
                       className={`
                         relative rounded-2xl border bg-gradient-to-br ${node.color}
                         ${node.borderColor} cursor-pointer

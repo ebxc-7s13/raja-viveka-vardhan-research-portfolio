@@ -208,7 +208,11 @@ export default function DotGrid() {
         }
       }
 
-      // === NEON GREEN MOUSE TRAIL (LINE) ===
+      // === MOUSE TRAIL (LINE) — green in night, cyan in day ===
+      const isDayMode = document.body.classList.contains('day-mode');
+      const trailR = isDayMode ? 0 : 57;
+      const trailG = isDayMode ? 220 : 255;
+      const trailB = isDayMode ? 255 : 20;
       const trail = trailRef.current;
       for (let i = trail.length - 1; i >= 0; i--) {
         trail[i].life -= 0.025;
@@ -223,14 +227,14 @@ export default function DotGrid() {
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(57, 255, 20, ${alpha * 0.3})`;
+          ctx.strokeStyle = `rgba(${trailR}, ${trailG}, ${trailB}, ${alpha * 0.3})`;
           ctx.lineWidth = width + 6;
           ctx.lineCap = 'round';
           ctx.stroke();
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(57, 255, 20, ${alpha})`;
+          ctx.strokeStyle = `rgba(${trailR}, ${trailG}, ${trailB}, ${alpha})`;
           ctx.lineWidth = width;
           ctx.lineCap = 'round';
           ctx.stroke();
@@ -253,7 +257,7 @@ export default function DotGrid() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-[3]"
       aria-hidden="true"
     />
   );

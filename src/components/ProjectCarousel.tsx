@@ -145,6 +145,7 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div
+                  data-day-card
                   className={`
                     rounded-2xl border overflow-hidden transition-all duration-500
                     ${

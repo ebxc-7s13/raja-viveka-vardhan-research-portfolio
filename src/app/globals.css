@@ -170,3 +170,389 @@ select:focus-visible {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   DAY MODE — activated by body.day-mode class
+   Covers every background, text, and border class used in the app.
+   Night mode is completely untouched.
+   ═══════════════════════════════════════════════════════════ */
+
+body.day-mode {
+  background: #E8F4FD !important;
+  color: #1e3a5f !important;
+}
+
+/* ─── PAGE BACKGROUNDS → transparent ─── */
+body.day-mode main,
+body.day-mode section,
+body.day-mode footer,
+body.day-mode .bg-black {
+  background-color: transparent !important;
+}
+/* Override .bg-slate-950/.bg-slate-900 on page-level main elements */
+body.day-mode main[class*="bg-slate"] {
+  background-color: transparent !important;
+}
+
+/* ─── STANDALONE DARK ELEMENTS → light (not transparent) ─── */
+body.day-mode .bg-slate-950,
+body.day-mode .bg-slate-900 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* ─── CARD / BOX BACKGROUNDS → white glass ─── */
+body.day-mode .bg-slate-900\/50,
+body.day-mode .bg-slate-900\/60,
+body.day-mode .bg-slate-900\/70,
+body.day-mode .bg-slate-900\/80,
+body.day-mode [class*="bg-slate-900/"] {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* ─── INPUT / BUTTON BACKGROUNDS → light ─── */
+body.day-mode .bg-slate-800,
+body.day-mode [class*="bg-slate-800"] {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* ─── CAROUSEL / THESIS CARDS [data-day-card] → light background ─── */
+body.day-mode [data-day-card] {
+  background-image: none !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+}
+/* Active carousel card glow → softer blue */
+body.day-mode [data-day-card].shadow-lg {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.12), 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+}
+/* Image gradient overlay inside cards → light fade */
+body.day-mode [data-day-card] [class*="bg-gradient-to-t"] {
+  background-image: linear-gradient(to top, rgba(255,255,255,0.6) 0%, transparent 100%) !important;
+}
+/* Card inner icon boxes → light tint */
+body.day-mode [data-day-card] .bg-indigo-500\/20,
+body.day-mode [data-day-card] [class*="bg-indigo-500/"] {
+  background-color: rgba(59, 130, 246, 0.12) !important;
+}
+body.day-mode [data-day-card] .bg-slate-800\/50 {
+  background-color: rgba(203, 213, 225, 0.5) !important;
+}
+/* Active indicator bars inside cards */
+body.day-mode [data-day-card] .bg-slate-700 {
+  background-color: rgba(148, 163, 184, 0.4) !important;
+}
+
+/* ─── RESEARCH PHILOSOPHY [data-day-philosophy] → light ─── */
+body.day-mode [data-day-philosophy] {
+  background-image: none !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+/* ─── SKILL PROGRESS BAR TRACKS ─── */
+body.day-mode .bg-slate-800.rounded-full {
+  background-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+/* ─── HERO OVERLAY GRADIENTS → fade out in day mode ─── */
+body.day-mode section > div.absolute.inset-0[class*="from-indigo-950"],
+body.day-mode section > div.absolute.inset-0[class*="from-emerald-950"],
+body.day-mode section > div.absolute.inset-0[class*="from-violet-950"] {
+  opacity: 0 !important;
+}
+
+/* ─── DARKER OUTLINES / BORDERS for all text blocks ─── */
+body.day-mode section + section {
+  border-top-color: rgba(26, 54, 93, 0.2) !important;
+}
+body.day-mode .rounded-2xl,
+body.day-mode .rounded-xl,
+body.day-mode .rounded-lg {
+  border-color: rgba(26, 54, 93, 0.15) !important;
+}
+body.day-mode blockquote {
+  border-color: #3b82f6 !important;
+}
+body.day-mode code {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+  color: #1e40af !important;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+body.day-mode pre {
+  border-color: rgba(59, 130, 246, 0.15) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ─── NAV BAR ─── */
+
+/* ─── NAV BAR ─── */
+body.day-mode nav {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-bottom-color: rgba(26, 54, 93, 0.12) !important;
+  backdrop-filter: blur(12px);
+}
+body.day-mode nav .text-white { color: #1a365d !important; }
+body.day-mode nav .text-white\/60 { color: #4a6fa5 !important; }
+body.day-mode nav .bg-white { background: #3b82f6 !important; color: white !important; }
+body.day-mode nav .border-white\/20 { border-color: rgba(26, 54, 93, 0.15) !important; }
+
+/* ─── MARQUEE ─── */
+body.day-mode .border-y-white\/20 {
+  border-color: rgba(26, 54, 93, 0.1) !important;
+}
+
+/* ─── HEADINGS → dark blue ─── */
+body.day-mode h1,
+body.day-mode h2,
+body.day-mode h3,
+body.day-mode h4 {
+  color: #1a365d !important;
+}
+
+/* ─── WHITE TEXT → dark variants ─── */
+body.day-mode .text-white { color: #1a365d !important; }
+body.day-mode .text-white\/70 { color: #2d5a8e !important; }
+body.day-mode .text-white\/60 { color: #3d6a9e !important; }
+body.day-mode .text-white\/50 { color: #4a78ae !important; }
+body.day-mode .text-white\/40 { color: #5a88be !important; }
+body.day-mode .text-white\/30 { color: #6b98ce !important; }
+body.day-mode .text-white\/20 { color: #7ca8de !important; }
+
+/* ─── SLATE TEXT → dark variants for readability ─── */
+body.day-mode .text-slate-300,
+body.day-mode [class*="text-slate-3"] {
+  color: #1e3a5f !important;
+}
+body.day-mode .text-slate-400,
+body.day-mode [class*="text-slate-4"] {
+  color: #334e68 !important;
+}
+body.day-mode .text-slate-500,
+body.day-mode [class*="text-slate-5"] {
+  color: #486581 !important;
+}
+body.day-mode .text-slate-600,
+body.day-mode [class*="text-slate-6"] {
+  color: #627d98 !important;
+}
+body.day-mode .text-slate-700,
+body.day-mode [class*="text-slate-7"] {
+  color: #829ab1 !important;
+}
+
+/* ─── WHITE BORDERS → subtle blue ─── */
+body.day-mode .border-white\/10,
+body.day-mode .border-white\/20,
+body.day-mode .border-white\/30 {
+  border-color: rgba(26, 54, 93, 0.12) !important;
+}
+body.day-mode .border-white\/40 {
+  border-color: rgba(26, 54, 93, 0.2) !important;
+}
+body.day-mode .border-white {
+  border-color: rgba(26, 54, 93, 0.15) !important;
+}
+
+/* ─── SLATE BORDERS → light ─── */
+body.day-mode .border-slate-700,
+body.day-mode [class*="border-slate-7"] {
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+body.day-mode .border-slate-800,
+body.day-mode [class*="border-slate-8"] {
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+body.day-mode .border-slate-600,
+body.day-mode [class*="border-slate-6"] {
+  border-color: rgba(148, 163, 184, 0.5) !important;
+}
+
+/* ─── HOVER BORDERS → light ─── */
+body.day-mode .hover\:border-slate-600:hover,
+body.day-mode .hover\:border-slate-700:hover {
+  border-color: rgba(100, 116, 139, 0.4) !important;
+}
+body.day-mode .hover\:border-white\/60:hover,
+body.day-mode .hover\:border-white\/40:hover {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* ─── HOVER BACKGROUNDS → light ─── */
+body.day-mode .hover\:bg-slate-700:hover,
+body.day-mode .hover\:bg-slate-800:hover {
+  background-color: rgba(203, 213, 225, 0.7) !important;
+}
+body.day-mode .hover\:bg-white\/10:hover {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+/* ─── WHITE DIVIDERS → blue accent ─── */
+body.day-mode .bg-white.mt-4,
+body.day-mode .bg-white.mb-6 {
+  background: #3b82f6 !important;
+}
+
+/* ─── WHITE BACKGROUND ELEMENTS → adjusted ─── */
+body.day-mode .bg-white.p-3 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(26, 54, 93, 0.1) !important;
+}
+body.day-mode .bg-white {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ─── CTA BUTTONS — filled ─── */
+body.day-mode a.bg-white {
+  background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+body.day-mode a.bg-white:hover {
+  background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+}
+
+/* ─── OUTLINED BUTTONS ─── */
+body.day-mode a.border-white\/30 {
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  color: #3b82f6 !important;
+}
+body.day-mode a.border-white\/30:hover {
+  border-color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.08) !important;
+}
+
+/* ─── RESEARCH TAGS ─── */
+body.day-mode span.border-white\/30 {
+  border-color: rgba(26, 54, 93, 0.2) !important;
+  color: #3d6a9e !important;
+}
+
+/* ─── STATUS BADGES ─── */
+body.day-mode .border-white.border-white {
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+body.day-mode .border-white\/60.text-white\/60 {
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  color: rgba(59, 130, 246, 0.8) !important;
+}
+
+/* ─── CORNER MARKS ─── */
+body.day-mode .text-white\/20.font-mono.text-xs {
+  color: rgba(26, 54, 93, 0.35) !important;
+}
+
+/* ─── IMAGE GRID STATS BOXES ─── */
+body.day-mode .bg-black.border-white\/30 {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(26, 54, 93, 0.15) !important;
+}
+
+/* ─── PLACEHOLDER TEXT ─── */
+body.day-mode .placeholder\:text-slate-500::placeholder,
+body.day-mode [class*="placeholder:text-slate"]::placeholder {
+  color: #829ab1 !important;
+}
+
+/* ─── PROSE / RESEARCH CONTENT ─── */
+body.day-mode .prose-research h1,
+body.day-mode .prose-research h2,
+body.day-mode .prose-research h3 {
+  color: #1a365d !important;
+}
+body.day-mode .prose-research p,
+body.day-mode .prose-research li {
+  color: #334e68 !important;
+}
+body.day-mode .prose-research ul li::before {
+  color: #3b82f6 !important;
+}
+body.day-mode .prose-research code {
+  background: rgba(59, 130, 246, 0.08) !important;
+  color: #1e40af !important;
+}
+body.day-mode .prose-research pre {
+  background: rgba(59, 130, 246, 0.05) !important;
+  border-color: rgba(59, 130, 246, 0.15) !important;
+}
+body.day-mode .prose-research blockquote {
+  border-color: #3b82f6 !important;
+  color: #486581 !important;
+}
+body.day-mode .prose-research th {
+  background: rgba(59, 130, 246, 0.08) !important;
+  color: #1a365d !important;
+}
+body.day-mode .prose-research td {
+  border-color: rgba(26, 54, 93, 0.1) !important;
+  color: #334e68 !important;
+}
+body.day-mode .prose-research a {
+  color: #3b82f6 !important;
+  text-decoration-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+/* ─── SCROLLBAR ─── */
+body.day-mode ::-webkit-scrollbar-track {
+  background: #E8F4FD !important;
+}
+body.day-mode ::-webkit-scrollbar-thumb {
+  background: #94a3b8 !important;
+}
+
+/* ─── SELECTION ─── */
+body.day-mode ::selection {
+  background: #3b82f6 !important;
+  color: white !important;
+}
+
+/* ─── 3D BUTTON SHADOWS ─── */
+body.day-mode a[href],
+body.day-mode button:not([disabled]),
+body.day-mode [role="button"] {
+  box-shadow: 0 3px 0 rgba(59, 130, 246, 0.15), 0 1px 3px rgba(0,0,0,0.06) !important;
+}
+body.day-mode a[href]:hover,
+body.day-mode button:not([disabled]):hover,
+body.day-mode [role="button"]:hover {
+  box-shadow: 0 4px 0 rgba(59, 130, 246, 0.2), 0 2px 6px rgba(0,0,0,0.08) !important;
+}
+
+/* ─── SVG ICONS (from libraries) ─── */
+body.day-mode svg.text-slate-700,
+body.day-mode svg[class*="text-slate-7"] {
+  color: #94a3b8 !important;
+}
+body.day-mode svg.text-slate-400,
+body.day-mode svg[class*="text-slate-4"] {
+  color: #486581 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DAY MODE ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes cloudDrift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 200px)); }
+}
+
+@keyframes flowerSway {
+  0% { transform: rotate(-5deg) scale(1); }
+  100% { transform: rotate(5deg) scale(1.05); }
+}
+
+@keyframes butterflyFloat {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(40px, -30px) rotate(5deg); }
+  50% { transform: translate(80px, 10px) rotate(-3deg); }
+  75% { transform: translate(40px, -20px) rotate(4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes birdFly {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 100px)); }
+}
+

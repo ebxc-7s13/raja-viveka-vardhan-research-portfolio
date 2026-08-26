@@ -139,6 +139,7 @@ export default function ResearchCarousel({ themes }: { themes: Theme[] }) {
               }}
             >
               <div
+                data-day-card
                 className={`
                   rounded-2xl border p-6 transition-all duration-500
                   ${

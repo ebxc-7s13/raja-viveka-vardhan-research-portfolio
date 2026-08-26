@@ -2,6 +2,7 @@ import { getDb } from '@/lib/db';
 import Link from 'next/link';
 import Image from 'next/image';
 import ImageCrossFade from '@/components/ImageCrossFade';
+import GlassTitle from '@/components/GlassTitle';
 
 export default function Home() {
   const db = getDb();
@@ -111,7 +112,7 @@ export default function Home() {
         <div className="flex items-end justify-between mb-12">
           <div>
             <div className="text-[10px] font-mono text-white/30 tracking-brutal uppercase mb-2">[002]</div>
-            <h2 className="text-white">Featured Research</h2>
+            <GlassTitle><h2 className="text-white">Featured Research</h2></GlassTitle>
             <div className="w-16 h-[2px] bg-white mt-4" />
           </div>
           <Link href="/research" className="text-white/40 hover:text-white text-xs font-mono font-bold tracking-brutal uppercase">
@@ -153,7 +154,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="text-[10px] font-mono text-white/30 tracking-brutal uppercase mb-2">[003]</div>
-              <h2 className="text-white">Publications</h2>
+              <GlassTitle><h2 className="text-white">Publications</h2></GlassTitle>
               <div className="w-16 h-[2px] bg-white mt-4" />
             </div>
             <Link href="/publications" className="text-white/40 hover:text-white text-xs font-mono font-bold tracking-brutal uppercase">
@@ -189,7 +190,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="text-[10px] font-mono text-white/30 tracking-brutal uppercase mb-2">[004]</div>
-              <h2 className="text-white">Research Notes</h2>
+              <GlassTitle><h2 className="text-white">Research Notes</h2></GlassTitle>
               <div className="w-16 h-[2px] bg-white mt-4" />
             </div>
             <Link href="/blog" className="text-white/40 hover:text-white text-xs font-mono font-bold tracking-brutal uppercase">
@@ -226,7 +227,7 @@ export default function Home() {
           <div className="absolute bottom-3 left-3 text-white/20 font-mono text-[10px]">◆</div>
           <div className="absolute bottom-3 right-3 text-white/20 font-mono text-[10px]">◆</div>
 
-          <h2 className="text-white mb-4">Collaboration</h2>
+          <GlassTitle><h2 className="text-white mb-4">Collaboration</h2></GlassTitle>
           <div className="w-16 h-[2px] bg-white mx-auto mb-6" />
           <p className="text-white/40 mb-8 max-w-2xl mx-auto font-mono text-sm">
             Open to research collaborations in biomedical imaging,
