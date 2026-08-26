@@ -4,7 +4,7 @@
 
 :root {
   --foreground: #f0f0f0;
-  --background: #0a0a0a;
+  --background: #000000;
 }
 
 body {
@@ -15,6 +15,13 @@ body {
   line-height: 1.5;
   font-family: var(--font-space), system-ui, sans-serif;
 }
+
+/* === DARKER BACKGROUNDS === */
+.bg-slate-950 { background-color: #000000 !important; }
+.bg-slate-900\/50 { background-color: rgba(0, 0, 0, 0.7) !important; }
+.bg-slate-900\/60 { background-color: rgba(0, 0, 0, 0.75) !important; }
+.bg-slate-900\/80 { background-color: rgba(0, 0, 0, 0.85) !important; }
+.bg-slate-900 { background-color: #0a0a0a !important; }
 
 /* === BRUTALIST HEADINGS === */
 h1, h2, h3, h4 {
@@ -162,3 +169,4 @@ select:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+

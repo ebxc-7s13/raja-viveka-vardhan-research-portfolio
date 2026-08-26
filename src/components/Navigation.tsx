@@ -12,6 +12,7 @@ const navItems = [
   { href: '/patents', label: 'PATENTS' },
   { href: '/timeline', label: 'TIMELINE' },
   { href: '/blog', label: 'NOTES' },
+  { href: '/about', label: 'ABOUT' },
   { href: '/contact', label: 'CONTACT' },
 ];
 

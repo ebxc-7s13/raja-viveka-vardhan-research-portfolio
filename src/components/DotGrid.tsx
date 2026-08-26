@@ -53,6 +53,7 @@ export default function DotGrid() {
   const trailRef = useRef<TrailPoint[]>([]);
   const lastTrailRef = useRef(0);
 
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
