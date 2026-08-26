@@ -1,5 +1,4 @@
 import { getDb } from '@/lib/db';
-import Image from 'next/image';
 import ThesisFlow from '@/components/ThesisFlow';
 
 export const metadata = {
@@ -68,77 +67,6 @@ export default async function ThesisPage() {
 
               {/* Interactive node flow */}
               <ThesisFlow thesis={thesis} />
-
-              {/* B.Tech ECG Thesis — Results Images */}
-              {thesis.id === 2 && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <span className="text-2xl">📈</span>
-                    Results & Experimental Output
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="border border-white/10 rounded-xl overflow-hidden bg-slate-900/50">
-                      <div className="relative aspect-[4/3]">
-                        <Image
-                          src="/theses/btech-ecg/download.png"
-                          alt="ECG Signal Acquisition — Raw ECG waveform captured from the acquisition system"
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="p-4 border-t border-white/10">
-                        <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Fig. 1</p>
-                        <p className="text-sm text-slate-300">Raw ECG signal waveform captured during data acquisition from cannabis-consuming and non-consuming subjects.</p>
-                      </div>
-                    </div>
-
-                    <div className="border border-white/10 rounded-xl overflow-hidden bg-slate-900/50">
-                      <div className="relative aspect-[4/3]">
-                        <Image
-                          src="/theses/btech-ecg/corer.png"
-                          alt="ECG Morphological Feature Extraction — Correlation analysis of ECG morphological features"
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="p-4 border-t border-white/10">
-                        <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Fig. 2</p>
-                        <p className="text-sm text-slate-300">Morphological feature correlation matrix showing discriminative ECG features used for differentiation between subject groups.</p>
-                      </div>
-                    </div>
-
-                    <div className="border border-white/10 rounded-xl overflow-hidden bg-slate-900/50">
-                      <div className="relative aspect-[4/3]">
-                        <Image
-                          src="/theses/btech-ecg/Screenshot 2024-03-08 095833.png"
-                          alt="ML Model Training — ECG feature classification results"
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="p-4 border-t border-white/10">
-                        <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Fig. 3</p>
-                        <p className="text-sm text-slate-300">Machine learning model training output showing classification performance on extracted ECG morphological features.</p>
-                      </div>
-                    </div>
-
-                    <div className="border border-white/10 rounded-xl overflow-hidden bg-slate-900/50">
-                      <div className="relative aspect-[4/3]">
-                        <Image
-                          src="/theses/btech-ecg/Screenshot 2024-03-08 113903.png"
-                          alt="Final Results — Model evaluation metrics and confusion matrix"
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="p-4 border-t border-white/10">
-                        <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Fig. 4</p>
-                        <p className="text-sm text-slate-300">Final model evaluation results with accuracy metrics and confusion matrix for cannabis-consumer differentiation.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </article>
           ))}
         </div>
