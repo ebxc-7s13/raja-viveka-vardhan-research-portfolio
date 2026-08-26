@@ -24,6 +24,9 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.production
+.env.development
 
 # vercel
 .vercel
@@ -34,6 +37,24 @@ next-env.d.ts
 
 # database
 data/
+*.db
+*.db-shm
+*.db-wal
+
+# logs
+*.log
+server-err.log
+server-out.log
+
+# personal files
+*.pdf
+
+# Windows
+desktop.ini
+
+# backups
+*.backup
+backups/
 
 # IDE
 .vscode/
