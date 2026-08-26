@@ -1,6 +1,5 @@
 import { getDb } from '@/lib/db';
-import Link from 'next/link';
-import Image from 'next/image';
+import ThesisFlow from '@/components/ThesisFlow';
 
 export const metadata = {
   title: 'Theses | Raja Viveka Vardhan Siluveru',
@@ -33,67 +32,41 @@ export default async function ThesisPage() {
         </div>
       </section>
 
-      {/* Theses */}
+      {/* Theses — each as an interactive node flow */}
       <section className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="space-y-8">
+        <div className="space-y-24">
           {theses.map((thesis: any) => (
-            <article key={thesis.id} className="bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-cyan-500/30 transition-colors">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                  {thesis.degree}
-                </span>
-                <span className="text-sm text-slate-500">{thesis.year}</span>
+            <article key={thesis.id} className="relative">
+              {/* Thesis header */}
+              <div className="mb-12 text-center">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    {thesis.degree}
+                  </span>
+                  <span className="text-sm text-slate-500 font-mono">{thesis.year}</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 max-w-4xl mx-auto">
+                  {thesis.title}
+                </h2>
+                <div className="flex items-center justify-center gap-4 text-sm text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    {thesis.institution}
+                  </span>
+                  <span className="text-slate-700">•</span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    {thesis.supervisor}
+                  </span>
+                </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-white mb-3">{thesis.title}</h2>
-
-              <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                {thesis.institution}
-              </div>
-
-              <div className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Supervisor: {thesis.supervisor}
-              </div>
-
-              {/* Key sections */}
-              <div className="space-y-4 mb-6">
-                <div>
-                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Research Problem</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.research_problem}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Methodology</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.methodology}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-cyan-400 mb-1">Key Contributions</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.key_contributions}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-emerald-400 mb-1">Results</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{thesis.results}</p>
-                </div>
-                {thesis.conclusions && (
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-400 mb-1">Conclusions</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{thesis.conclusions}</p>
-                  </div>
-                )}
-                {thesis.future_work && (
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-400 mb-1">Future Work</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{thesis.future_work}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* PDF download removed per author request */}
+              {/* Interactive node flow */}
+              <ThesisFlow thesis={thesis} />
             </article>
           ))}
         </div>

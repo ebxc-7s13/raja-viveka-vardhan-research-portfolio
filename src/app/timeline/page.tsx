@@ -1,4 +1,5 @@
 import { getDb } from '@/lib/db';
+import TimelineClient from '@/components/TimelineClient';
 
 export const metadata = {
   title: 'Research Timeline | Raja Viveka Vardhan Siluveru',
@@ -47,15 +48,6 @@ export default async function TimelinePage() {
     startup: 'Startup',
   };
 
-  // Group by year
-  const grouped: Record<string, any[]> = {};
-  milestones.forEach((m: any) => {
-    if (!grouped[m.year]) grouped[m.year] = [];
-    grouped[m.year].push(m);
-  });
-
-  const years = Object.keys(grouped).sort();
-
   return (
     <main className="min-h-screen bg-slate-950">
       {/* Hero */}
@@ -92,44 +84,11 @@ export default async function TimelinePage() {
 
       {/* Timeline */}
       <section className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-slate-800" />
-
-          {years.map((year, yearIdx) => (
-            <div key={year} className="mb-16 last:mb-0">
-              {/* Year marker */}
-              <div className="relative flex items-center mb-8">
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-700 flex items-center justify-center z-10">
-                  <span className="text-sm font-bold text-white">{year}</span>
-                </div>
-              </div>
-
-              {/* Events for this year */}
-              <div className="space-y-4 ml-20 md:ml-0">
-                {grouped[year].map((event: any, idx: number) => {
-                  const isLeft = (yearIdx + idx) % 2 === 0;
-                  return (
-                    <div key={idx} className={`md:flex ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}>
-                      <div className={`md:w-5/12 ${isLeft ? 'md:pr-12' : 'md:pl-12'}`}>
-                        <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-5 hover:border-slate-700 transition-colors">
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className={`w-2 h-2 rounded-full ${categoryColors[event.category] || 'bg-slate-500'}`} />
-                            <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                              {categoryLabels[event.category] || event.category}
-                            </span>
-                          </div>
-                          <h3 className="text-lg font-semibold text-white mb-1">{event.title}</h3>
-                          <p className="text-sm text-slate-400">{event.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
+        <TimelineClient
+          milestones={milestones}
+          categoryColors={categoryColors}
+          categoryLabels={categoryLabels}
+        />
       </section>
     </main>
   );

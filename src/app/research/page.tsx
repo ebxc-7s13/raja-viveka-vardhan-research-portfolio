@@ -1,6 +1,6 @@
 import { getDb } from '@/lib/db';
 import Link from 'next/link';
-import Image from 'next/image';
+import ProjectCarousel from '@/components/ProjectCarousel';
 
 export const metadata = {
   title: 'Research Projects | Raja Viveka Vardhan Siluveru',
@@ -76,10 +76,13 @@ export default async function ResearchPage({
         </div>
       </section>
 
-      {/* Projects */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
+      {/* Projects — 3D Carousel */}
+      <section className="py-12 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 mb-8">
+          <p className="text-slate-500 text-sm text-center font-mono">Drag or use ← → arrow keys to explore</p>
+        </div>
         {projects.length === 0 ? (
-          <div className="text-center py-16 bg-slate-900/50 rounded-2xl border border-slate-800">
+          <div className="text-center py-16 bg-slate-900/50 rounded-2xl border border-slate-800 mx-6">
             <p className="text-slate-400 text-lg">
               {isValidStatus ? `No ${statusFilter.replace(/_/g, ' ')} projects right now.` : 'Research projects coming soon.'}
             </p>
@@ -90,78 +93,12 @@ export default async function ResearchPage({
             )}
           </div>
         ) : (
-          <div className="space-y-6">
-            {projects.map((project: any) => {
-              const mediaCount = countMap.get(project.id) || 0;
-              return (
-                <Link
-                  key={project.id}
-                  href={`/research/${project.slug}`}
-                  className="block group bg-slate-900/50 rounded-xl border border-slate-800 overflow-hidden hover:border-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                >
-                  <div className="md:flex">
-                    {/* Cover Image */}
-                    {project.cover_image && (
-                      <div className="md:w-72 h-48 md:h-auto flex-shrink-0 relative overflow-hidden">
-                        <Image
-                          src={project.cover_image}
-                          alt={project.title}
-                          fill
-                          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                          loading="lazy"
-                          sizes="(max-width: 768px) 100vw, 288px"
-                        />
-                      </div>
-                    )}
-
-                    <div className="p-5 md:p-6 flex-1">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className={`px-2.5 py-0.5 text-xs font-medium rounded-full ${
-                          project.status === 'completed' ? 'bg-emerald-500/10 text-emerald-400' :
-                          project.status === 'ongoing' ? 'bg-blue-500/10 text-blue-400' :
-                          project.status === 'under_review' ? 'bg-amber-500/10 text-amber-400' :
-                          'bg-purple-500/10 text-purple-400'
-                        }`}>
-                          {String(project.status).replace(/_/g, ' ')}
-                        </span>
-                        {project.featured ? <span className="text-xs text-amber-400 font-medium">Featured</span> : null}
-                        {mediaCount > 0 && (
-                          <span className="text-xs text-slate-500">{mediaCount} media</span>
-                        )}
-                      </div>
-
-                      <h2 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors leading-snug">
-                        {project.title}
-                      </h2>
-
-                      {/* Problem → Results preview */}
-                      <div className="flex flex-col sm:flex-row gap-4 mb-3">
-                        {project.research_problem && (
-                          <div className="flex-1">
-                            <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Problem</p>
-                            <p className="text-sm text-slate-400 line-clamp-2">{project.research_problem}</p>
-                          </div>
-                        )}
-                        {project.results && (
-                          <div className="flex-1">
-                            <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-0.5">Key Result</p>
-                            <p className="text-sm text-slate-400 line-clamp-2">{project.results}</p>
-                          </div>
-                        )}
-                      </div>
-
-                      <span className="text-sm text-indigo-400 font-medium inline-flex items-center gap-1">
-                        View case study
-                        <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          <ProjectCarousel
+            projects={projects.map((p: any) => ({
+              ...p,
+              media_count: countMap.get(p.id) || 0,
+            }))}
+          />
         )}
       </section>
     </main>

@@ -127,6 +127,22 @@ html { scroll-behavior: smooth; }
 /* === VIDEO === */
 video { max-height: 480px; object-fit: contain; }
 
+/* === 3D CLICKABLE BUTTONS === */
+a, button, [role="button"] {
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+a:active, button:active, [role="button"]:active {
+  transform: translateY(1px) !important;
+  box-shadow: none !important;
+}
+a[href], button:not([disabled]), [role="button"] {
+  box-shadow: 0 3px 0 rgba(255,255,255,0.15), 0 1px 3px rgba(0,0,0,0.3);
+}
+a[href]:hover, button:not([disabled]):hover, [role="button"]:hover {
+  box-shadow: 0 4px 0 rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.4);
+  transform: translateY(-1px);
+}
+
 /* === FOCUS STATES === */
 a:focus-visible,
 button:focus-visible,

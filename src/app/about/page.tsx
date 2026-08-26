@@ -1,5 +1,6 @@
 import { getDb } from '@/lib/db';
 import Image from 'next/image';
+import ResearchCarousel from '@/components/ResearchCarousel';
 
 export const metadata = {
   title: 'About | Raja Viveka Vardhan Siluveru — Biomedical Engineering Researcher',
@@ -136,19 +137,14 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Research Themes */}
+      {/* Research Themes — 3D Carousel */}
       {themes.length > 0 && (
-        <section className="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800/50">
-          <h2 className="text-3xl font-bold text-white mb-12">Research Themes</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {themes.map((theme: any) => (
-              <div key={theme.id} className="bg-slate-900/50 rounded-2xl border border-slate-800 p-6 hover:border-indigo-500/30 transition-colors">
-                <div className="text-3xl mb-3">{theme.icon}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{theme.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{theme.description}</p>
-              </div>
-            ))}
+        <section className="py-20 border-t border-slate-800/50 overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-3xl font-bold text-white mb-4 text-center">Research Themes</h2>
+            <p className="text-slate-500 text-sm text-center mb-8 font-mono">Drag or use ← → arrow keys to explore</p>
           </div>
+          <ResearchCarousel themes={themes} />
         </section>
       )}
 

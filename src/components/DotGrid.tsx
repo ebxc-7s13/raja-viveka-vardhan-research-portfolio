@@ -59,11 +59,13 @@ export default function DotGrid() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const DOT_SPACING = 24;
+    const DOT_SPACING = 30;
     const BASE_RADIUS = 1.2;
-    const MOUSE_RADIUS = 160;
-    const EXTRA_DOT_SPACING = 12;
+    const MOUSE_RADIUS = 140;
+    const EXTRA_DOT_SPACING = 14;
     const SHAPES: Patch['shape'][] = ['circle', 'rect', 'diamond'];
+    let mouseMoved = false;
+    let lastMouseMove = 0;
 
     function makePatches() {
       const w = canvas!.width || 2000;
@@ -98,14 +100,15 @@ export default function DotGrid() {
     function onMouse(e: MouseEvent) {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
+      mouseMoved = true;
+      lastMouseMove = performance.now();
 
-      // Add trail point every 16ms (~60fps)
+      // Add trail point every 32ms (~30fps) — reduced from 16ms
       const now = performance.now();
-      if (now - lastTrailRef.current > 16) {
+      if (now - lastTrailRef.current > 32) {
         lastTrailRef.current = now;
         trailRef.current.push({ x: e.clientX, y: e.clientY, life: 1 });
-        // Keep max 60 points (~1 second of trail)
-        if (trailRef.current.length > 60) {
+        if (trailRef.current.length > 40) {
           trailRef.current.shift();
         }
       }
@@ -118,6 +121,17 @@ export default function DotGrid() {
 
     function draw() {
       if (!ctx || !canvas) return;
+
+      const now = performance.now();
+      const timeSinceMouse = now - lastMouseMove;
+
+      // Throttle: skip frames when mouse idle > 200ms and no trail to render
+      const hasTrail = trailRef.current.length > 0;
+      if (!mouseMoved && !hasTrail && timeSinceMouse > 200) {
+        animRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
       timeRef.current += 0.016;
       const t = timeRef.current;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -146,7 +160,7 @@ export default function DotGrid() {
           }
           pulse = Math.min(pulse, 1);
 
-          let opacity = 0.06 + pulse * 0.2;
+          let opacity = 0.05 + pulse * 0.15;
           let radius = BASE_RADIUS;
 
           // Mouse hover
@@ -155,8 +169,8 @@ export default function DotGrid() {
           const distMouse = Math.sqrt(dx * dx + dy * dy);
           if (distMouse < MOUSE_RADIUS) {
             const factor = 1 - distMouse / MOUSE_RADIUS;
-            radius = BASE_RADIUS + factor * 1.725;
-            opacity = Math.min(opacity + factor * 0.1725, 0.40);
+            radius = BASE_RADIUS + factor * 1.5;
+            opacity = Math.min(opacity + factor * 0.15, 0.35);
           }
 
           ctx.beginPath();
@@ -185,8 +199,8 @@ export default function DotGrid() {
             if (dist < MOUSE_RADIUS) {
               const factor = 1 - dist / MOUSE_RADIUS;
               ctx.beginPath();
-              ctx.arc(x, y, 0.69 + factor * 1.15, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(255, 255, 255, ${factor * 0.207})`;
+              ctx.arc(x, y, 0.6 + factor * 1.0, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${factor * 0.18})`;
               ctx.fill();
             }
           }
@@ -195,19 +209,16 @@ export default function DotGrid() {
 
       // === NEON GREEN MOUSE TRAIL (LINE) ===
       const trail = trailRef.current;
-      // Fade and remove dead points
       for (let i = trail.length - 1; i >= 0; i--) {
-        trail[i].life -= 0.018;
+        trail[i].life -= 0.025;
         if (trail[i].life <= 0) trail.splice(i, 1);
       }
       if (trail.length > 1) {
-        // Draw line segments with varying opacity
         for (let i = 1; i < trail.length; i++) {
           const a = trail[i - 1];
           const b = trail[i];
           const alpha = b.life * 0.8;
           const width = 1 + b.life * 3;
-          // Glow layer
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -215,7 +226,6 @@ export default function DotGrid() {
           ctx.lineWidth = width + 6;
           ctx.lineCap = 'round';
           ctx.stroke();
-          // Core layer
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -226,6 +236,7 @@ export default function DotGrid() {
         }
       }
 
+      mouseMoved = false;
       animRef.current = requestAnimationFrame(draw);
     }
 

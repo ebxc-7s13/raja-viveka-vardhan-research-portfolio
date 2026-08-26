@@ -120,7 +120,7 @@ export default function ImageCrossFade() {
   }, [mounted, pickNewImage]);
 
   return (
-    <div className="grid grid-cols-3 gap-2 w-full rounded-2xl overflow-hidden border border-white/20" style={{ maxWidth: '520px', aspectRatio: '4 / 3' }}>
+    <div className="grid grid-cols-3 gap-2 w-full rounded-2xl overflow-hidden border-2 border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.08)]" style={{ maxWidth: '624px', aspectRatio: '4 / 3' }}>
       {cells.map((cell, i) => (
         <div
           key={`cell-${i}`}
