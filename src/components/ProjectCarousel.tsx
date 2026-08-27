@@ -47,35 +47,41 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [projects.length]);
+  }, [projects.length]);  // Detect touch device for lower threshold
+  const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
     setDragOffset(0);
     if (autoRotateRef.current) clearInterval(autoRotateRef.current);
+    // Prevent text selection on touch
+    if (e.pointerType === 'touch') {
+      e.preventDefault();
+    }
   }, []);
 
-  const handlePointerMove = useCallback(
-    (e: React.PointerEvent) => {
-      if (!isDragging) return;
-      const diff = e.clientX - startX;
-      setDragOffset(diff);
-    },
-    [isDragging, startX]
-  );
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const diff = e.clientX - startX;
+    setDragOffset(diff);
+    // Prevent vertical scroll while swiping horizontally on touch
+    if (e.pointerType === 'touch' && Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
+  }, [isDragging, startX]);
 
   const handlePointerUp = useCallback(() => {
     if (!isDragging) return;
     setIsDragging(false);
-    const threshold = 60;
+    const threshold = isTouch ? 30 : 60;
     if (dragOffset < -threshold) {
       setActiveIndex((prev) => (prev + 1) % projects.length);
     } else if (dragOffset > threshold) {
       setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
     }
     setDragOffset(0);
-  }, [isDragging, dragOffset, projects.length]);
+  }, [isDragging, dragOffset, projects.length, isTouch]);
 
   function getSlideStyle(index: number) {
     const total = projects.length;

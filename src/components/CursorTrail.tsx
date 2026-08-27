@@ -12,6 +12,11 @@ function hexToRgb(hex: string) {
   return { r, g, b };
 }
 
+function isTouchDevice() {
+  if (typeof window === 'undefined') return false;
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
 export default function CursorTrail({ color }: { color: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointsRef = useRef<{ x: number; y: number }[]>([]);
@@ -19,11 +24,15 @@ export default function CursorTrail({ color }: { color: string }) {
   const mouseRef = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number>(0);
   const colorRef = useRef(color);
+  const isMobile = isTouchDevice();
 
   // Keep colorRef in sync
   useEffect(() => {
     colorRef.current = color;
   }, [color]);
+
+  // Don't render anything on touch devices
+  if (isMobile) return null;
 
   useEffect(() => {
     const canvas = canvasRef.current;

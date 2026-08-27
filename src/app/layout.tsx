@@ -42,6 +42,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" href="/mobile.css" media="(max-width: 768px)" />
+      </head>
       <body suppressHydrationWarning className={`${spaceGrotesk.variable} ${jetbrains.variable} font-sans antialiased`}>
         <DotGrid />
         <ThemeToggle />
