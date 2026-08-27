@@ -578,6 +578,13 @@ body.blossom-mode .bg-black {
 body.blossom-mode main[class*="bg-slate"] {
   background-color: transparent !important;
 }
+/* Page-level main elements must NOT get the frosted-glass treatment */
+body.blossom-mode main.bg-slate-950,
+body.blossom-mode main.bg-slate-900 {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
+}
 
 /* ─── CARD / BOX BACKGROUNDS → frosted glass over wallpaper ─── */
 body.blossom-mode .bg-slate-950,

@@ -12,8 +12,8 @@ const WALLPAPERS = [
   '/wallpapers/blossom-7.jfif',
 ];
 
-const CROSSFADE_DURATION = 3000;
-const DISPLAY_DURATION = 12000;
+const CROSSFADE_DURATION = 5000;
+const DISPLAY_DURATION = 14000;
 
 export default function BlossomTheme() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,7 +52,7 @@ export default function BlossomTheme() {
           src={WALLPAPERS[currentIndex]}
           alt=""
           className="w-full h-full object-cover"
-          style={{ filter: 'blur(4px) brightness(0.55) saturate(1.1)' }}
+          style={{ filter: 'blur(3px) brightness(0.55) saturate(1.1)' }}
         />
       </div>
 
@@ -69,7 +69,7 @@ export default function BlossomTheme() {
           src={WALLPAPERS[nextIndex]}
           alt=""
           className="w-full h-full object-cover"
-          style={{ filter: 'blur(4px) brightness(0.55) saturate(1.1)' }}
+          style={{ filter: 'blur(3px) brightness(0.55) saturate(1.1)' }}
         />
       </div>
 
