@@ -350,7 +350,7 @@ async function seed() {
       status: 'completed',
       featured: 0,
       sort_order: 6,
-      cover_image: null,
+      cover_image: '/research/ecg-cannabis-detection/corer.png',
     },
   ];
 
@@ -521,6 +521,7 @@ async function seed() {
   const microgravityId = (db.prepare('SELECT id FROM projects WHERE slug = ?').get('microgravity-platform') as any).id;
   const microscopeId = (db.prepare('SELECT id FROM projects WHERE slug = ?').get('oncospectrix-microscope') as any).id;
   const coalId = (db.prepare('SELECT id FROM projects WHERE slug = ?').get('coal-volume-estimation') as any).id;
+  const ecgId = (db.prepare('SELECT id FROM projects WHERE slug = ?').get('ecg-cannabis-detection') as any).id;
 
   const mediaStmt = db.prepare('INSERT INTO project_media (project_id, file_path, media_type, caption, section, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
 
@@ -601,6 +602,12 @@ async function seed() {
   mediaStmt.run(coalId, '/research/coal-volume/scan_map.png', 'image', 'ROS 2 sensor-fusion scan map — YOLO-segmented coal occupancy with LiDAR depth profiling.', 'computational_method', 1);
   mediaStmt.run(coalId, '/research/coal-volume/session_20260801_220024.png', 'image', 'Conveyor belt scanning session — real-time volumetric and mass flow-rate measurement.', 'experimental_setup', 2);
   mediaStmt.run(coalId, '/research/coal-volume/WhatsApp Image 2026-08-21 at 13.58.34.jpeg', 'image', 'Industrial conveyor system with PiCamera2 and RPLIDAR sensor mounted above belt.', 'hardware', 3);
+
+  // ECG Cannabis Detection
+  mediaStmt.run(ecgId, '/research/ecg-cannabis-detection/corer.png', 'image', 'ECG signal processing pipeline — bandpass and notch filtering with db4 wavelet baseline-wander removal for morphological feature extraction.', 'methodology', 1);
+  mediaStmt.run(ecgId, '/research/ecg-cannabis-detection/download.png', 'image', 'Pan-Tompkins QRS detection and P/QRS/T wave delineation on sample ECG recordings.', 'methodology', 2);
+  mediaStmt.run(ecgId, '/research/ecg-cannabis-detection/feature-extraction.png', 'image', 'Morphological feature extraction — RR interval, QRS duration/amplitude, P-wave and T-wave parameters from delineated ECG signals.', 'experimental_setup', 3);
+  mediaStmt.run(ecgId, '/research/ecg-cannabis-detection/classifier-results.png', 'image', 'ML classifier performance comparison — Gradient Boosting achieves 92% accuracy with AUC 0.98 for cannabis consumption detection.', 'results', 4);
 
   console.log('✅ Project media created');
   console.log('🎉 Database seeded successfully with research data!');

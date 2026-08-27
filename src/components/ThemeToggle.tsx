@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import BlossomTheme from './BlossomTheme';
 import CursorTrail from './CursorTrail';
-import NightStars from './NightStars';
 
 type Theme = 'night' | 'day' | 'blossom';
 
@@ -350,8 +349,7 @@ export default function ThemeToggle() {
       {/* Cursor trail */}
       <CursorTrail color={trailColor} />
 
-      {/* Night mode twinkling stars */}
-      {isNight && <NightStars />}
+
 
       {/* ── Day mode nature overlay ── */}
       {isDay && (
