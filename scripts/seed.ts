@@ -555,32 +555,32 @@ async function seed() {
   mediaStmt.run(microscopeId, '/research/microscope/WhatsApp Image 2026-08-21 at 13.58.09 (1).jpeg', 'image', 'Microscope prototype — close-up of optical assembly and LED excitation module.', 'hardware', 5);
 
   // OncoSpectrix Microscope — PPT content: LED excitation table
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 170928.png', 'image', 'LED excitation wavelengths and corresponding metabolite emissions: 405 nm → NAD(P)H (440–460 nm), 465 nm → FAD/flavins (510–540 nm), 520 nm → Lipofuscin (600–700 nm). Cellular autofluorescence imaging captures metabolic signatures.', 'methodology', 10);
+  mediaStmt.run(microscopeId, '/research/microscope/led-excitation-wavelengths.png', 'image', 'LED excitation wavelengths and corresponding metabolite emissions: 405 nm → NAD(P)H (440–460 nm), 465 nm → FAD/flavins (510–540 nm), 520 nm → Lipofuscin (600–700 nm). Cellular autofluorescence imaging captures metabolic signatures.', 'methodology', 10);
 
   // PPT: Literature review — oral cancer statistics
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 170945.png', 'image', 'Oral cancer statistics and motivation: 60–80% diagnosed at Stage III/IV in India; need for affordable rapid screening at primary care level using label-free non-invasive autofluorescence imaging.', 'research_problem', 11);
+  mediaStmt.run(microscopeId, '/research/microscope/oral-cancer-statistics.png', 'image', 'Oral cancer statistics and motivation: 60–80% diagnosed at Stage III/IV in India; need for affordable rapid screening at primary care level using label-free non-invasive autofluorescence imaging.', 'research_problem', 11);
 
   // PPT: Sample collection and imaging workflow
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171003.png', 'image', 'Schematic representation of sample collection and imaging workflow: (A) Collecting oral cells using cotton swab. (B) Mixing cells in inoculum with PBS. (C) Centrifuge. (D) Smear preparation. (E) Imaging under multispectral microscope. (F) Multi-excitation autofluorescent images.', 'experimental_setup', 12);
+  mediaStmt.run(microscopeId, '/research/microscope/sample-collection-workflow.png', 'image', 'Schematic representation of sample collection and imaging workflow: (A) Collecting oral cells using cotton swab. (B) Mixing cells in inoculum with PBS. (C) Centrifuge. (D) Smear preparation. (E) Imaging under multispectral microscope. (F) Multi-excitation autofluorescent images.', 'experimental_setup', 12);
 
   // PPT: AFI images of oral cells
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171027.png', 'image', 'Autofluorescent images of oral cells: (A) Excited at 405 nm (blue channel), (B) 488 nm (green), (C) 550 nm (red), (D) Pseudo-RGB composite with 256×256 ROI cropping. Complete single-cell oral AFI dataset with 3 channels for all study groups.', 'data_acquisition', 13);
+  mediaStmt.run(microscopeId, '/research/microscope/afi-cell-images.png', 'image', 'Autofluorescent images of oral cells: (A) Excited at 405 nm (blue channel), (B) 488 nm (green), (C) 550 nm (red), (D) Pseudo-RGB composite with 256×256 ROI cropping. Complete single-cell oral AFI dataset with 3 channels for all study groups.', 'data_acquisition', 13);
 
   // PPT: FASCANet architecture diagram
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171103.png', 'image', 'FASCANet denoising model architecture: db2 wavelet decomposition into LL (coarse structure/edges) and HL/LH/HH (texture/fine details/noise) subbands. Residual network with alternating 6 residual blocks and Spatial Cross-Attention. Bidirectional frequency-band information exchange preserves relevant texture while removing noise.', 'computational_method', 14);
+  mediaStmt.run(microscopeId, '/research/microscope/fascanet-architecture.png', 'image', 'FASCANet denoising model architecture: db2 wavelet decomposition into LL (coarse structure/edges) and HL/LH/HH (texture/fine details/noise) subbands. Residual network with alternating 6 residual blocks and Spatial Cross-Attention. Bidirectional frequency-band information exchange preserves relevant texture while removing noise.', 'computational_method', 14);
 
   // PPT: Denoising comparison
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171118.png', 'image', 'FASCANet denoising results: Raw autofluorescence input, corrupted versions under three noise models, FASCANet-denoised outputs, and residual noise maps. FASCANet preserves high-frequency details of AFI while removing noise. Trained using Noisier2Noise protocol with L1 loss.', 'results', 15);
+  mediaStmt.run(microscopeId, '/research/microscope/denoising-results.png', 'image', 'FASCANet denoising results: Raw autofluorescence input, corrupted versions under three noise models, FASCANet-denoised outputs, and residual noise maps. FASCANet preserves high-frequency details of AFI while removing noise. Trained using Noisier2Noise protocol with L1 loss.', 'results', 15);
 
   // PPT: Denoising performance table
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171153.png', 'image', 'Table 1: Image quality metrics for denoising models under mixed Poisson-Gaussian noise (λ=30, σ=0.02). FASCANet: PSNR 37.15 dB, SSIM 0.84, VIF 0.39. Table 2: 3-class classification performance — raw vs FASCANet-denoised AFI: cancer precision improved 0.86→0.96, specificity 0.94→0.98.', 'results', 16);
+  mediaStmt.run(microscopeId, '/research/microscope/denoising-metrics-table.png', 'image', 'Table 1: Image quality metrics for denoising models under mixed Poisson-Gaussian noise (λ=30, σ=0.02). FASCANet: PSNR 37.15 dB, SSIM 0.84, VIF 0.39. Table 2: 3-class classification performance — raw vs FASCANet-denoised AFI: cancer precision improved 0.86→0.96, specificity 0.94→0.98.', 'results', 16);
 
   // PPT: Redox ratio preservation
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot 2026-08-21 171214.png', 'image', 'Optical redox ratio FAD/(NADH+FAD) before and after FASCANet denoising. Normal-suspicious-cancer ordering is preserved. FASCANet effectively suppresses noise while preserving subtle autofluorescence textures and biologically meaningful fluorescence characteristics.', 'results', 17);
+  mediaStmt.run(microscopeId, '/research/microscope/redox-ratio-preservation.png', 'image', 'Optical redox ratio FAD/(NADH+FAD) before and after FASCANet denoising. Normal-suspicious-cancer ordering is preserved. FASCANet effectively suppresses noise while preserving subtle autofluorescence textures and biologically meaningful fluorescence characteristics.', 'results', 17);
 
   // Existing screenshots — on-edge pipeline
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot_2026-08-08_133944.png', 'image', 'On-edge cell segmentation pipeline output — brightfield reference image with watershed-based cell boundary detection.', 'computational_method', 20);
-  mediaStmt.run(microscopeId, '/research/microscope/Screenshot_2026-08-08_134716.png', 'image', 'On-edge autofluorescence image processing pipeline output — segmented cells with fluorescence intensity analysis.', 'computational_method', 21);
+  mediaStmt.run(microscopeId, '/research/microscope/edge-segmentation-brightfield.png', 'image', 'On-edge cell segmentation pipeline output — brightfield reference image with watershed-based cell boundary detection.', 'computational_method', 20);
+  mediaStmt.run(microscopeId, '/research/microscope/edge-fluorescence-analysis.png', 'image', 'On-edge autofluorescence image processing pipeline output — segmented cells with fluorescence intensity analysis.', 'computational_method', 21);
   mediaStmt.run(microscopeId, '/research/microscope/WhatsApp Video 2026-08-21 at 13.58.22.mp4', 'video', 'OncoSpectrix prototype demonstration — complete acquisition and on-edge screening pipeline in operation.', 'experimental_setup', 22);
 
   // Raspberry Pi edge processing images
