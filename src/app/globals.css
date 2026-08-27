@@ -60,6 +60,12 @@ p, li, span, td, th, label, input, textarea, select, button, a {
   to { opacity: 1; }
 }
 
+/* === TWINKLE (NIGHT STARS) === */
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
 /* === BRUTALIST LINE DECORATIONS === */
 .brutalist-line {
   position: relative;
@@ -554,5 +560,361 @@ body.day-mode svg[class*="text-slate-4"] {
 @keyframes birdFly {
   from { transform: translateX(0); }
   to { transform: translateX(calc(100vw + 100px)); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BLOSSOM MODE — activated by body.blossom-mode class
+   Wallpaper background with translucent modules.
+   Night and Day modes completely untouched.
+   ═══════════════════════════════════════════════════════════ */
+
+body.blossom-mode {
+  background: transparent !important;
+  color: #f0e6e8 !important;
+}
+
+/* ─── PAGE BACKGROUNDS → transparent so wallpaper shows through ─── */
+body.blossom-mode main,
+body.blossom-mode section,
+body.blossom-mode footer,
+body.blossom-mode .bg-black {
+  background-color: transparent !important;
+}
+body.blossom-mode main[class*="bg-slate"] {
+  background-color: transparent !important;
+}
+
+/* ─── CARD / BOX BACKGROUNDS → frosted glass over wallpaper ─── */
+body.blossom-mode .bg-slate-950,
+body.blossom-mode .bg-slate-900 {
+  background-color: rgba(10, 10, 15, 0.55) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 182, 193, 0.15);
+}
+body.blossom-mode .bg-slate-900\/50,
+body.blossom-mode .bg-slate-900\/60,
+body.blossom-mode .bg-slate-900\/70,
+body.blossom-mode .bg-slate-900\/80,
+body.blossom-mode [class*="bg-slate-900/"] {
+  background-color: rgba(10, 10, 15, 0.5) !important;
+  backdrop-filter: blur(14px);
+}
+
+/* ─── INPUT / BUTTON BACKGROUNDS ─── */
+body.blossom-mode .bg-slate-800,
+body.blossom-mode [class*="bg-slate-800"] {
+  background-color: rgba(30, 20, 25, 0.55) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* ─── CAROUSEL / THESIS CARDS ─── */
+body.blossom-mode [data-day-card] {
+  background-image: none !important;
+  background-color: rgba(15, 10, 20, 0.5) !important;
+  border-color: rgba(255, 182, 193, 0.2) !important;
+  backdrop-filter: blur(14px);
+}
+body.blossom-mode [data-day-card].shadow-lg {
+  box-shadow: 0 0 30px rgba(255, 182, 193, 0.1), 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+}
+body.blossom-mode [data-day-card] [class*="bg-gradient-to-t"] {
+  background-image: linear-gradient(to top, rgba(15,10,20,0.6) 0%, transparent 100%) !important;
+}
+body.blossom-mode [data-day-card] .bg-indigo-500\/20,
+body.blossom-mode [data-day-card] [class*="bg-indigo-500/"] {
+  background-color: rgba(255, 182, 193, 0.1) !important;
+}
+body.blossom-mode [data-day-card] .bg-slate-800\/50 {
+  background-color: rgba(30, 20, 25, 0.45) !important;
+}
+body.blossom-mode [data-day-card] .bg-slate-700 {
+  background-color: rgba(80, 50, 60, 0.3) !important;
+}
+
+/* ─── RESEARCH PHILOSOPHY ─── */
+body.blossom-mode [data-day-philosophy] {
+  background-image: none !important;
+  background-color: rgba(15, 10, 20, 0.5) !important;
+  border-color: rgba(255, 182, 193, 0.15) !important;
+  backdrop-filter: blur(14px);
+}
+
+/* ─── SKILL PROGRESS BAR TRACKS ─── */
+body.blossom-mode .bg-slate-800.rounded-full {
+  background-color: rgba(40, 25, 30, 0.5) !important;
+}
+
+/* ─── HERO OVERLAY GRADIENTS → soften in blossom ─── */
+body.blossom-mode section > div.absolute.inset-0[class*="from-indigo-950"],
+body.blossom-mode section > div.absolute.inset-0[class*="from-emerald-950"],
+body.blossom-mode section > div.absolute.inset-0[class*="from-violet-950"] {
+  opacity: 0.3 !important;
+}
+
+/* ─── BORDERS ─── */
+body.blossom-mode section + section {
+  border-top-color: rgba(255, 182, 193, 0.1) !important;
+}
+body.blossom-mode .rounded-2xl,
+body.blossom-mode .rounded-xl,
+body.blossom-mode .rounded-lg {
+  border-color: rgba(255, 182, 193, 0.12) !important;
+}
+body.blossom-mode blockquote {
+  border-color: #FFB6C1 !important;
+}
+body.blossom-mode code {
+  background-color: rgba(255, 182, 193, 0.1) !important;
+  color: #FFD1DC !important;
+  border: 1px solid rgba(255, 182, 193, 0.2);
+}
+body.blossom-mode pre {
+  border-color: rgba(255, 182, 193, 0.15) !important;
+  background-color: rgba(10, 10, 15, 0.5) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* ─── NAV BAR — translucent glass ─── */
+body.blossom-mode nav {
+  background: rgba(10, 10, 15, 0.55) !important;
+  border-bottom-color: rgba(255, 182, 193, 0.12) !important;
+  backdrop-filter: blur(16px);
+}
+body.blossom-mode nav .text-white { color: #f0e6e8 !important; }
+body.blossom-mode nav .text-white\/60 { color: rgba(240, 230, 232, 0.6) !important; }
+body.blossom-mode nav .bg-white { background: #FFB6C1 !important; color: #1a1015 !important; }
+body.blossom-mode nav .border-white\/20 { border-color: rgba(255, 182, 193, 0.15) !important; }
+
+/* ─── MARQUEE ─── */
+body.blossom-mode .border-y-white\/20 {
+  border-color: rgba(255, 182, 193, 0.12) !important;
+}
+
+/* ─── HEADINGS — soft pink-white ─── */
+body.blossom-mode h1,
+body.blossom-mode h2,
+body.blossom-mode h3,
+body.blossom-mode h4 {
+  color: #ffffff !important;
+}
+
+/* ─── TEXT — warm light, brighter for contrast ─── */
+body.blossom-mode .text-white { color: #ffffff !important; }
+body.blossom-mode .text-white\/70 { color: rgba(255, 255, 255, 0.88) !important; }
+body.blossom-mode .text-white\/60 { color: rgba(255, 255, 255, 0.78) !important; }
+body.blossom-mode .text-white\/50 { color: rgba(255, 255, 255, 0.68) !important; }
+body.blossom-mode .text-white\/40 { color: rgba(255, 255, 255, 0.58) !important; }
+body.blossom-mode .text-white\/30 { color: rgba(255, 255, 255, 0.45) !important; }
+body.blossom-mode .text-white\/20 { color: rgba(255, 255, 255, 0.35) !important; }
+
+/* ─── SLATE TEXT ─── */
+body.blossom-mode .text-slate-300,
+body.blossom-mode [class*="text-slate-3"] {
+  color: rgba(255, 250, 252, 0.95) !important;
+}
+body.blossom-mode .text-slate-400,
+body.blossom-mode [class*="text-slate-4"] {
+  color: rgba(255, 245, 248, 0.82) !important;
+}
+body.blossom-mode .text-slate-500,
+body.blossom-mode [class*="text-slate-5"] {
+  color: rgba(245, 230, 235, 0.72) !important;
+}
+body.blossom-mode .text-slate-600,
+body.blossom-mode [class*="text-slate-6"] {
+  color: rgba(230, 215, 220, 0.62) !important;
+}
+body.blossom-mode .text-slate-700,
+body.blossom-mode [class*="text-slate-7"] {
+  color: rgba(215, 200, 205, 0.52) !important;
+}
+
+/* ─── WHITE BORDERS ─── */
+body.blossom-mode .border-white\/10,
+body.blossom-mode .border-white\/20,
+body.blossom-mode .border-white\/30 {
+  border-color: rgba(255, 182, 193, 0.12) !important;
+}
+body.blossom-mode .border-white\/40 {
+  border-color: rgba(255, 182, 193, 0.2) !important;
+}
+body.blossom-mode .border-white {
+  border-color: rgba(255, 182, 193, 0.15) !important;
+}
+
+/* ─── SLATE BORDERS ─── */
+body.blossom-mode .border-slate-700,
+body.blossom-mode [class*="border-slate-7"] {
+  border-color: rgba(80, 50, 60, 0.35) !important;
+}
+body.blossom-mode .border-slate-800,
+body.blossom-mode [class*="border-slate-8"] {
+  border-color: rgba(60, 40, 50, 0.35) !important;
+}
+body.blossom-mode .border-slate-600,
+body.blossom-mode [class*="border-slate-6"] {
+  border-color: rgba(100, 70, 80, 0.3) !important;
+}
+
+/* ─── HOVER STATES ─── */
+body.blossom-mode .hover\:border-slate-600:hover,
+body.blossom-mode .hover\:border-slate-700:hover {
+  border-color: rgba(255, 182, 193, 0.3) !important;
+}
+body.blossom-mode .hover\:border-white\/60:hover,
+body.blossom-mode .hover\:border-white\/40:hover {
+  border-color: rgba(255, 182, 193, 0.3) !important;
+}
+body.blossom-mode .hover\:bg-slate-700:hover,
+body.blossom-mode .hover\:bg-slate-800:hover {
+  background-color: rgba(40, 25, 30, 0.6) !important;
+}
+body.blossom-mode .hover\:bg-white\/10:hover {
+  background-color: rgba(255, 182, 193, 0.08) !important;
+}
+
+/* ─── WHITE DIVIDERS ─── */
+body.blossom-mode .bg-white.mt-4,
+body.blossom-mode .bg-white.mb-6 {
+  background: rgba(255, 182, 193, 0.4) !important;
+}
+
+/* ─── WHITE BACKGROUND ELEMENTS ─── */
+body.blossom-mode .bg-white.p-3 {
+  background: rgba(255, 240, 243, 0.15) !important;
+  border: 1px solid rgba(255, 182, 193, 0.15) !important;
+  backdrop-filter: blur(10px);
+}
+body.blossom-mode .bg-white {
+  background-color: rgba(255, 240, 243, 0.12) !important;
+}
+
+/* ─── CTA BUTTONS ─── */
+body.blossom-mode a.bg-white {
+  background: rgba(255, 182, 193, 0.3) !important;
+  color: #fff0f3 !important;
+  border-color: rgba(255, 182, 193, 0.25) !important;
+  backdrop-filter: blur(8px);
+}
+body.blossom-mode a.bg-white:hover {
+  background: rgba(255, 182, 193, 0.45) !important;
+}
+
+/* ─── OUTLINED BUTTONS ─── */
+body.blossom-mode a.border-white\/30 {
+  border-color: rgba(255, 182, 193, 0.3) !important;
+  color: #FFB6C1 !important;
+}
+body.blossom-mode a.border-white\/30:hover {
+  border-color: rgba(255, 182, 193, 0.5) !important;
+  background: rgba(255, 182, 193, 0.08) !important;
+}
+
+/* ─── RESEARCH TAGS ─── */
+body.blossom-mode span.border-white\/30 {
+  border-color: rgba(255, 182, 193, 0.2) !important;
+  color: #FFD1DC !important;
+}
+
+/* ─── STATUS BADGES ─── */
+body.blossom-mode .border-white.border-white {
+  border-color: #FFB6C1 !important;
+  color: #FFB6C1 !important;
+}
+body.blossom-mode .border-white\/60.text-white\/60 {
+  border-color: rgba(255, 182, 193, 0.5) !important;
+  color: rgba(255, 182, 193, 0.7) !important;
+}
+
+/* ─── CORNER MARKS ─── */
+body.blossom-mode .text-white\/20.font-mono.text-xs {
+  color: rgba(255, 182, 193, 0.3) !important;
+}
+
+/* ─── IMAGE GRID STATS BOXES ─── */
+body.blossom-mode .bg-black.border-white\/30 {
+  background: rgba(10, 10, 15, 0.55) !important;
+  border-color: rgba(255, 182, 193, 0.15) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* ─── PLACEHOLDER TEXT ─── */
+body.blossom-mode .placeholder\:text-slate-500::placeholder,
+body.blossom-mode [class*="placeholder:text-slate"]::placeholder {
+  color: rgba(200, 180, 185, 0.5) !important;
+}
+
+/* ─── PROSE / RESEARCH CONTENT ─── */
+body.blossom-mode .prose-research h1,
+body.blossom-mode .prose-research h2,
+body.blossom-mode .prose-research h3 {
+  color: #fff0f3 !important;
+}
+body.blossom-mode .prose-research p,
+body.blossom-mode .prose-research li {
+  color: rgba(255, 250, 252, 0.95) !important;
+}
+body.blossom-mode .prose-research ul li::before {
+  color: #FFB6C1 !important;
+}
+body.blossom-mode .prose-research code {
+  background: rgba(255, 182, 193, 0.1) !important;
+  color: #FFD1DC !important;
+}
+body.blossom-mode .prose-research pre {
+  background: rgba(10, 10, 15, 0.5) !important;
+  border-color: rgba(255, 182, 193, 0.15) !important;
+}
+body.blossom-mode .prose-research blockquote {
+  border-color: #FFB6C1 !important;
+  color: rgba(240, 225, 230, 0.82) !important;
+}
+body.blossom-mode .prose-research th {
+  background: rgba(255, 182, 193, 0.1) !important;
+  color: #fff0f3 !important;
+}
+body.blossom-mode .prose-research td {
+  border-color: rgba(255, 182, 193, 0.1) !important;
+  color: rgba(255, 248, 250, 0.92) !important;
+}
+body.blossom-mode .prose-research a {
+  color: #FFB6C1 !important;
+  text-decoration-color: rgba(255, 182, 193, 0.4) !important;
+}
+
+/* ─── SCROLLBAR ─── */
+body.blossom-mode ::-webkit-scrollbar-track {
+  background: rgba(10, 10, 15, 0.3) !important;
+}
+body.blossom-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255, 182, 193, 0.4) !important;
+}
+
+/* ─── SELECTION ─── */
+body.blossom-mode ::selection {
+  background: rgba(255, 182, 193, 0.5) !important;
+  color: #1a1015 !important;
+}
+
+/* ─── 3D BUTTON SHADOWS ─── */
+body.blossom-mode a[href],
+body.blossom-mode button:not([disabled]),
+body.blossom-mode [role="button"] {
+  box-shadow: 0 3px 0 rgba(255, 182, 193, 0.12), 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+body.blossom-mode a[href]:hover,
+body.blossom-mode button:not([disabled]):hover,
+body.blossom-mode [role="button"]:hover {
+  box-shadow: 0 4px 0 rgba(255, 182, 193, 0.18), 0 2px 6px rgba(0,0,0,0.4) !important;
+}
+
+/* ─── SVG ICONS ─── */
+body.blossom-mode svg.text-slate-700,
+body.blossom-mode svg[class*="text-slate-7"] {
+  color: rgba(240, 225, 230, 0.65) !important;
+}
+body.blossom-mode svg.text-slate-400,
+body.blossom-mode svg[class*="text-slate-4"] {
+  color: rgba(245, 235, 240, 0.78) !important;
 }
 

@@ -38,20 +38,12 @@ function distToShape(
   }
 }
 
-interface TrailPoint {
-  x: number;
-  y: number;
-  life: number; // 1 = fresh, 0 = dead
-}
-
 export default function DotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
   const patchesRef = useRef<Patch[]>([]);
-  const trailRef = useRef<TrailPoint[]>([]);
-  const lastTrailRef = useRef(0);
 
 
   useEffect(() => {
@@ -103,16 +95,6 @@ export default function DotGrid() {
       mouseRef.current.y = e.clientY;
       mouseMoved = true;
       lastMouseMove = performance.now();
-
-      // Add trail point every 32ms (~30fps) — reduced from 16ms
-      const now = performance.now();
-      if (now - lastTrailRef.current > 32) {
-        lastTrailRef.current = now;
-        trailRef.current.push({ x: e.clientX, y: e.clientY, life: 1 });
-        if (trailRef.current.length > 40) {
-          trailRef.current.shift();
-        }
-      }
     }
     window.addEventListener('mousemove', onMouse);
     window.addEventListener('mouseleave', () => {
@@ -126,9 +108,8 @@ export default function DotGrid() {
       const now = performance.now();
       const timeSinceMouse = now - lastMouseMove;
 
-      // Throttle: skip frames when mouse idle > 200ms and no trail to render
-      const hasTrail = trailRef.current.length > 0;
-      if (!mouseMoved && !hasTrail && timeSinceMouse > 200) {
+      // Throttle: skip frames when mouse idle > 200ms
+      if (!mouseMoved && timeSinceMouse > 200) {
         animRef.current = requestAnimationFrame(draw);
         return;
       }
@@ -208,39 +189,6 @@ export default function DotGrid() {
         }
       }
 
-      // === MOUSE TRAIL (LINE) — green in night, cyan in day ===
-      const isDayMode = document.body.classList.contains('day-mode');
-      const trailR = isDayMode ? 0 : 57;
-      const trailG = isDayMode ? 220 : 255;
-      const trailB = isDayMode ? 255 : 20;
-      const trail = trailRef.current;
-      for (let i = trail.length - 1; i >= 0; i--) {
-        trail[i].life -= 0.025;
-        if (trail[i].life <= 0) trail.splice(i, 1);
-      }
-      if (trail.length > 1) {
-        for (let i = 1; i < trail.length; i++) {
-          const a = trail[i - 1];
-          const b = trail[i];
-          const alpha = b.life * 0.8;
-          const width = 1 + b.life * 3;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(${trailR}, ${trailG}, ${trailB}, ${alpha * 0.3})`;
-          ctx.lineWidth = width + 6;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(${trailR}, ${trailG}, ${trailB}, ${alpha})`;
-          ctx.lineWidth = width;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-        }
-      }
-
       mouseMoved = false;
       animRef.current = requestAnimationFrame(draw);
     }
@@ -257,7 +205,7 @@ export default function DotGrid() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[3]"
+      className="fixed inset-0 pointer-events-none z-[1]"
       aria-hidden="true"
     />
   );

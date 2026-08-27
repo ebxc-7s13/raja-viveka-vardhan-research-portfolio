@@ -14,6 +14,7 @@ const navItems = [
   { href: '/blog', label: 'NOTES' },
   { href: '/about', label: 'ABOUT' },
   { href: '/contact', label: 'CONTACT' },
+  { href: '/admin', label: 'ADMIN' },
 ];
 
 export default function Navigation() {
@@ -35,7 +36,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-0">
+          <div className="hidden md:flex items-center gap-0 flex-1 justify-center">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
               return (
@@ -52,16 +53,6 @@ export default function Navigation() {
                 </Link>
               );
             })}
-          </div>
-
-          {/* Admin link */}
-          <div className="hidden md:block">
-            <Link
-              href="/admin"
-              className="px-3 py-1.5 text-xs font-mono font-bold tracking-brutal text-white/40 hover:text-white border border-white/20 hover:border-white/60 transition-colors"
-            >
-              [ADMIN]
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -99,13 +90,6 @@ export default function Navigation() {
                 </Link>
               );
             })}
-            <Link
-              href="/admin"
-              onClick={() => setMobileOpen(false)}
-              className="block px-3 py-2 text-xs font-mono text-white/40 hover:text-white"
-            >
-              [ADMIN]
-            </Link>
           </div>
         )}
       </div>
