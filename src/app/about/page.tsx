@@ -108,7 +108,7 @@ export default async function AboutPage() {
               <div>
                 <h3 className="text-xl font-bold text-white">M.Tech — Biomedical Engineering</h3>
                 <p className="text-indigo-400 font-medium">IIEST Shibpur, Centre for Healthcare Science and Technology</p>
-                <p className="text-slate-500 text-sm mt-1">2024 – 2026 · CGPA: 10/10 · University Gold Medallist</p>
+                <p className="text-slate-500 text-sm mt-1">2024 – 2026 · CGPA: 9.93/10 · University Gold Medallist</p>
                 <p className="text-slate-400 mt-3 leading-relaxed">
                   Thesis: &quot;A Non-Invasive AI-Based Framework for Early Oral Cancer Detection 
                   Using Autofluorescence Imaging&quot; — Developing a unified AFI pipeline with 

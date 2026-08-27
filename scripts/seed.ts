@@ -473,7 +473,7 @@ async function seed() {
     { title: 'Synthetic Augmentation Manuscript Submitted to CBM', description: 'Manuscript submitted to Computers in Biology and Medicine (Elsevier). Under review.', date: '2026', category: 'publication', icon: '📝', sort_order: 12 },
     { title: 'Patent Filed: AFI Device & AI Screening', description: 'Patent application for OncoSpectrix hardware + AI diagnostic platform, filed with IIEST Shibpur and AI4ICPS I-Hub Foundation (IIT Kharagpur).', date: '2026', category: 'patent', icon: '📄', sort_order: 13 },
     { title: 'OncoSpectrix MedTech Startup Incubated', description: 'Startup incubated at TCGTBI, IIEST Shibpur. Integrating OncoSpectrix hardware, AI stack, IEC clinical approvals, and patent filing. Multiple BIRAC grant proposals authored.', date: '2026', category: 'startup', icon: '🚀', sort_order: 14 },
-    { title: 'M.Tech Graduation — University Gold Medallist', description: 'Graduated with M.Tech in Biomedical Engineering, CGPA 10/10. University Gold Medallist.', date: '2026', category: 'award', icon: '🏆', sort_order: 15 },
+    { title: 'M.Tech Graduation — University Gold Medallist',      description: 'Graduated with M.Tech in Biomedical Engineering, CGPA 9.93/10. University Gold Medallist.', date: '2026', category: 'award', icon: '🏆', sort_order: 15 },
   ];
 
   const timeStmt = db.prepare('INSERT INTO timeline (title, description, date, category, icon, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
