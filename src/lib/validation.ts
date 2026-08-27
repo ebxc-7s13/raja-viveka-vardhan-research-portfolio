@@ -70,7 +70,8 @@ export const postSchema = z.object({
   content: z
     .string()
     .min(1, 'Content is required')
-    .max(50000, 'Content too long'),
+    .max(50000, 'Content too long')
+    .transform(sanitizeRichText),
   excerpt: z
     .string()
     .min(1, 'Excerpt is required')

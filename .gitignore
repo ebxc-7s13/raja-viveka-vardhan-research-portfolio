@@ -63,3 +63,15 @@ backups/
 # project screenshots & raw assets
 Btech ECG project/
 Screenshot *.png
+
+# raw research data (duplicates of public/ files)
+Mtech coal volume detection/
+Mtech microgravity/
+Mtech microscope/
+
+# text output files
+cv_output.txt
+elsevier_output.txt
+thesis_output.txt
+main_paper.txt
+server-admin-test.log

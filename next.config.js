@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
@@ -21,10 +23,12 @@ const nextConfig = {
           key: 'Content-Security-Policy',
           value: [
             "default-src 'self'",
-            // Next.js requires unsafe-inline for styles (CSS-in-JS)
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            // Production: no unsafe-eval; dev: allow it for Next.js HMR
+            isProd
+              ? "script-src 'self' 'unsafe-inline'"
+              : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
             "style-src 'self' 'unsafe-inline'",
-            // Only allow images from self and HTTPS sources
+            // Only allow images from self, data URIs, and HTTPS sources
             "img-src 'self' data: https:",
             // Fonts from self and data URIs only
             "font-src 'self' data:",
