@@ -63,6 +63,7 @@ backups/
 # project screenshots & raw assets
 Btech ECG project/
 Screenshot *.png
+wallpapers/
 
 # raw research data (duplicates of public/ files)
 Mtech coal volume detection/

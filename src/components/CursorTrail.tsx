@@ -31,9 +31,6 @@ export default function CursorTrail({ color }: { color: string }) {
     colorRef.current = color;
   }, [color]);
 
-  // Don't render anything on touch devices
-  if (isMobile) return null;
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -137,6 +134,9 @@ export default function CursorTrail({ color }: { color: string }) {
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
+
+  // Don't render canvas on touch devices
+  if (isMobile) return null;
 
   return (
     <canvas
