@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: raja-viveka-vardhan-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: ./data/portfolio.db
+      - key: JWT_SECRET
+        generateValue: true
