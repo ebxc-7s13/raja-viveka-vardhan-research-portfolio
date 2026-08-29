@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const WALLPAPERS = [
   '/wallpapers/blossom-1.jfif',
@@ -12,19 +12,41 @@ const WALLPAPERS = [
   '/wallpapers/blossom-7.jfif',
 ];
 
+// Fisher–Yates shuffle — returns a new randomized copy
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 const CROSSFADE_DURATION = 5000;
 const DISPLAY_DURATION = 14000;
 
 export default function BlossomTheme() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
+  // Shuffle once on mount so the starting image is random
+  const orderRef = useRef(shuffle(WALLPAPERS));
+  const posRef = useRef(0);
+
+  const [currentIndex, setCurrentIndex] = useState(() => orderRef.current[0]);
+  const [nextIndex, setNextIndex] = useState(() => orderRef.current[1 % orderRef.current.length]);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const advance = useCallback(() => {
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % WALLPAPERS.length);
-      setNextIndex((prev) => (prev + 1) % WALLPAPERS.length);
+      posRef.current += 1;
+      // When we've cycled through all images, reshuffle for a new random order
+      if (posRef.current >= orderRef.current.length) {
+        orderRef.current = shuffle(WALLPAPERS);
+        posRef.current = 0;
+      }
+      const cur = orderRef.current[posRef.current];
+      const nxt = orderRef.current[(posRef.current + 1) % orderRef.current.length];
+      setCurrentIndex(cur);
+      setNextIndex(nxt);
       setIsTransitioning(false);
     }, CROSSFADE_DURATION);
   }, []);
