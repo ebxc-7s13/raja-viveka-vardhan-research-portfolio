@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
+import { execSync } from 'child_process';
 
 const DB_PATH = process.env.DATABASE_PATH || './data/portfolio.db';
 
@@ -11,6 +12,7 @@ if (!fs.existsSync(dir)) {
 }
 
 let _db: Database.Database | null = null;
+let _seeded = false;
 
 export function getDb(): Database.Database {
   if (!_db) {
@@ -18,6 +20,29 @@ export function getDb(): Database.Database {
     _db.pragma('journal_mode = WAL');
     _db.pragma('foreign_keys = ON');
     initializeSchema(_db);
+    // Auto-seed if database is empty (first run on fresh deploy)
+    if (!_seeded) {
+      _seeded = true;
+      try {
+        const userCount = (_db.prepare('SELECT COUNT(*) as count FROM users').get() as any).count;
+        if (userCount === 0) {
+          console.log('[db] Empty database detected — running seed...');
+          execSync('npx tsx scripts/seed.ts', {
+            cwd: process.cwd(),
+            timeout: 30000,
+            stdio: 'pipe',
+          });
+          // Re-open the database after seed (seed drops/recreates tables)
+          _db.close();
+          _db = new Database(DB_PATH);
+          _db.pragma('journal_mode = WAL');
+          _db.pragma('foreign_keys = ON');
+          console.log('[db] Seed complete.');
+        }
+      } catch (e) {
+        console.error('[db] Auto-seed failed:', e);
+      }
+    }
   }
   return _db;
 }
