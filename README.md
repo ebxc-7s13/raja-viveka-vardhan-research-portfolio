@@ -1,16 +1,26 @@
-# 🔒 Secure Portfolio & Blog
+# Raja Viveka Vardhan Siluveru — Research Portfolio
 
-A production-ready, security-hardened portfolio and blog website built with Next.js, SQLite, and comprehensive security measures.
+A production-ready research portfolio website for **Raja Viveka Vardhan Siluveru**, a Biomedical Engineering researcher at IIEST Shibpur. Built with Next.js 15, SQLite, and comprehensive security measures.
 
-## 🚀 Features
+**Live site:** [raja-viveka-vardhan-portfolio-xp6d.onrender.com](https://raja-viveka-vardhan-portfolio-xp6d.onrender.com/)
 
-- **Portfolio Showcase** — Projects page with featured items, tech stacks, and live demo links
-- **Blog System** — Full CRUD with rich text content, slugs, and SEO metadata
+## Features
+
+- **Homepage** — Hero section, featured research highlights, research notes, and stats
+- **Research Projects** — 6 detailed case studies with carousel navigation (AFI framework, FASCANet denoising, microgravity platform, OncoSpectrix microscope, coal volume estimation, ECG cannabis detection)
+- **Theses** — Interactive node-based flowchart for M.Tech and B.Tech thesis presentations
+- **Publications** — Peer-reviewed manuscripts (IEEE JBHI, Elsevier CBM) with abstracts and metadata
+- **Patents** — Patent filings with detailed innovation descriptions
+- **Timeline** — Chronological research journey from 2018–2026
+- **About** — Academic background, 6 research themes, and technical expertise with skill bars
+- **Research Notes** — Blog-style research notes with rich content
 - **Contact Form** — Spam-protected with honeypot, time-based detection, and rate limiting
-- **Admin Dashboard** — Secure admin panel with authentication and audit logging
-- **Responsive Design** — Beautiful on all devices with Tailwind CSS
+- **Admin Dashboard** — Secure admin panel with authentication, audit logging, and CMS for all content
+- **Search** — Full-text search across projects, publications, and research notes
+- **Day/Night Theme Toggle** — Blossom theme, cursor trail, animated dot grid
+- **Responsive Design** — Mobile-optimized with touch interactions
 
-## 🛡️ Security Features
+## Security Features
 
 | Feature | Implementation |
 |---------|---------------|
@@ -24,18 +34,16 @@ A production-ready, security-hardened portfolio and blog website built with Next
 | **Session Management** | JWT tokens stored in sessions table, revocable on logout |
 | **Audit Logging** | All admin actions logged with IP, user agent, and timestamps |
 | **Spam Protection** | Honeypot fields, time-based detection, and content pattern filtering |
-| **Error Handling** | Production-safe error messages (no internal details leaked) |
-| **PoweredBy Header** | Removed to hide framework information |
 
-## 📦 Tech Stack
+## Tech Stack
 
-- **Frontend:** Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS
+- **Frontend:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS
 - **Backend:** Next.js API Routes, better-sqlite3
 - **Auth:** jose (JWT), bcryptjs
 - **Validation:** Zod, sanitize-html
-- **Styling:** Tailwind CSS with custom theme
+- **Styling:** Tailwind CSS with custom blossom theme, cursor trail, animated dot grid
 
-## 🏃 Getting Started
+## Getting Started
 
 ### 1. Install dependencies
 
@@ -45,18 +53,22 @@ npm install
 
 ### 2. Configure environment
 
-Edit `.env.local` and **change these before deploying**:
+Copy the example and set your secrets:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and set:
 
 ```bash
 # Generate a strong JWT secret
 node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
-# Set it in .env.local
 JWT_SECRET=your-generated-secret-here
-
-# Change admin credentials
 ADMIN_EMAIL=your@email.com
-ADMIN_PASSWORD=YourStr0ng!Password
+ADMIN_PASSWORD=YourStr0ng!Password123
+DATABASE_PATH=./data/portfolio.db
 ```
 
 ### 3. Seed the database
@@ -75,72 +87,74 @@ Visit:
 - **Site:** http://localhost:3000
 - **Admin:** http://localhost:3000/admin
 
-## 🔐 Before Deploying
-
-1. ✅ Generate a strong `JWT_SECRET` (64+ random characters)
-2. ✅ Change `ADMIN_PASSWORD` to a strong password (12+ chars, mixed case, numbers, symbols)
-3. ✅ Set `NEXT_PUBLIC_SITE_URL` to your production domain
-4. ✅ Ensure HTTPS is enabled (required for secure cookies)
-5. ✅ Review and customize the CSP headers in `next.config.js`
-6. ✅ Update social links in `Footer.tsx`
-7. ✅ Replace placeholder content with your own
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── src/
 │   ├── app/
-│   │   ├── api/
-│   │   │   ├── auth/          # Login, logout, session
-│   │   │   ├── contact/       # Contact form handler
-│   │   │   └── admin/         # Admin CRUD APIs
-│   │   ├── admin/             # Admin dashboard page
-│   │   ├── blog/              # Blog pages
-│   │   ├── projects/          # Projects page
-│   │   ├── about/             # About page
-│   │   ├── contact/           # Contact page
-│   │   └── layout.tsx         # Root layout
-│   ├── components/            # Reusable UI components
+│   │   ├── api/              # API routes (auth, contact, admin, seed)
+│   │   ├── admin/            # Admin dashboard page
+│   │   ├── research/         # Research projects with case studies
+│   │   ├── thesis/           # Thesis flowchart views
+│   │   ├── publications/     # Publications listing
+│   │   ├── timeline/         # Research timeline
+│   │   ├── about/            # About page with skills
+│   │   ├── contact/          # Contact form
+│   │   ├── search/           # Full-text search
+│   │   ├── blog/             # Research notes
+│   │   ├── patents/          # Patent listings
+│   │   ├── privacy/          # Privacy policy
+│   │   ├── terms/            # Terms of use
+│   │   ├── layout.tsx        # Root layout
+│   │   └── page.tsx          # Homepage
+│   ├── components/           # Reusable UI components
+│   │   ├── Navigation.tsx
+│   │   ├── Footer.tsx
+│   │   ├── DayNightToggle.tsx
+│   │   ├── BlossomTheme.tsx
+│   │   ├── CursorTrail.tsx
+│   │   ├── DotGrid.tsx
+│   │   ├── ThesisFlow.tsx
+│   │   ├── ProjectCarousel.tsx
+│   │   ├── ResearchCarousel.tsx
+│   │   ├── TimelineClient.tsx
+│   │   ├── FigureViewer.tsx
+│   │   ├── ImageCrossFade.tsx
+│   │   ├── GlassTitle.tsx
+│   │   ├── Marquee.tsx
+│   │   ├── AdminCms.tsx
+│   │   └── ThemeToggle.tsx
 │   └── lib/
-│       ├── auth.ts            # JWT + bcrypt auth
-│       ├── db.ts              # SQLite database setup
-│       ├── validation.ts      # Zod schemas + sanitization
-│       ├── rate-limit.ts      # Rate limiting
-│       └── api-utils.ts       # Response helpers + CSRF
+│       ├── auth.ts           # JWT + bcrypt authentication
+│       ├── db.ts             # SQLite database setup + auto-seed
+│       ├── validation.ts     # Zod schemas + sanitization
+│       ├── rate-limit.ts     # Rate limiting
+│       └── api-utils.ts      # Response helpers + CSRF
 ├── scripts/
-│   └── seed.ts                # Database seeding
-├── data/                      # SQLite database (gitignored)
-└── next.config.js             # Security headers config
+│   └── seed.ts               # Database seeding with full research data
+├── public/                   # Static assets (research images, videos)
+├── data/                     # SQLite database (gitignored)
+├── render.yaml               # Render deployment blueprint
+└── next.config.js            # Security headers config
 ```
 
-## 🚢 Deploy
+## Deployment
 
-### Vercel (Recommended)
+### Render (current)
+
+The site is deployed on Render using the included `render.yaml` blueprint. On first deploy:
+
+1. Render creates env vars (JWT_SECRET and ADMIN_PASSWORD are auto-generated)
+2. Build command runs `npm install && npm run build && npx tsx scripts/seed.ts`
+3. Seed script creates the admin user and populates all research data
+4. Auto-seed in `db.ts` also runs if the database is empty at runtime
+
+**Admin credentials** are set via the `ADMIN_EMAIL` and `ADMIN_PASSWORD` env vars in Render's dashboard.
+
+### Vercel
 
 ```bash
 npx vercel
-```
-
-### Docker
-
-```dockerfile
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM node:20-alpine AS runner
-WORKDIR /app
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/next.config.js ./
-
-EXPOSE 3000
-ENV NODE_ENV=production
-CMD ["npm", "start"]
 ```
 
 ### Self-hosted (PM2)
@@ -149,6 +163,24 @@ CMD ["npm", "start"]
 npm run build
 pm2 start npm --name portfolio -- start
 ```
+
+## Before Deploying
+
+1. Generate a strong `JWT_SECRET` (64+ random characters)
+2. Set a strong `ADMIN_PASSWORD` (12+ chars, mixed case, numbers, symbols)
+3. Set `ADMIN_EMAIL` to the admin account email
+4. Ensure HTTPS is enabled (required for secure cookies)
+5. Review and customize the CSP headers in `next.config.js`
+
+## Research Content
+
+The portfolio showcases research in:
+
+- **Non-Invasive Oral Cancer Detection** — FASCANet denoising, StyleGAN2 synthetic augmentation, AFiS-Net classification via autofluorescence imaging
+- **Microgravity Simulation** — IoT-enabled multi-modal clinostat/RPM platform with patent filing
+- **OncoSpectrix** — Portable LED autofluorescence microscope on Raspberry Pi 5 with on-edge AI
+- **Industrial Sensor Fusion** — ROS 2 camera-LiDAR coal volume estimation
+- **ECG Cannabis Detection** — ML-based morphological feature classification
 
 ## License
 

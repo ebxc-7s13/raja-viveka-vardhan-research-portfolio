@@ -15,6 +15,6 @@ services:
       - key: ADMIN_EMAIL
         value: admin@rajavivekavardhan.com
       - key: ADMIN_PASSWORD
-        value: RajaViveka2026SecurePass!
+        generateValue: true
       - key: NODE_VERSION
         value: 20.11.0
