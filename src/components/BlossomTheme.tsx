@@ -30,8 +30,8 @@ export default function BlossomTheme() {
   const orderRef = useRef(shuffle(WALLPAPERS));
   const posRef = useRef(0);
 
-  const [currentIndex, setCurrentIndex] = useState(() => orderRef.current[0]);
-  const [nextIndex, setNextIndex] = useState(() => orderRef.current[1 % orderRef.current.length]);
+  const [currentSrc, setCurrentSrc] = useState(orderRef.current[0]);
+  const [nextSrc, setNextSrc] = useState(orderRef.current[1 % orderRef.current.length]);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const advance = useCallback(() => {
@@ -45,8 +45,8 @@ export default function BlossomTheme() {
       }
       const cur = orderRef.current[posRef.current];
       const nxt = orderRef.current[(posRef.current + 1) % orderRef.current.length];
-      setCurrentIndex(cur);
-      setNextIndex(nxt);
+      setCurrentSrc(cur);
+      setNextSrc(nxt);
       setIsTransitioning(false);
     }, CROSSFADE_DURATION);
   }, []);
@@ -71,7 +71,7 @@ export default function BlossomTheme() {
         }}
       >
         <img
-          src={WALLPAPERS[currentIndex]}
+          src={currentSrc}
           alt=""
           className="w-full h-full object-cover"
           style={{ filter: 'blur(3px) brightness(0.55) saturate(1.1)' }}
@@ -88,7 +88,7 @@ export default function BlossomTheme() {
         }}
       >
         <img
-          src={WALLPAPERS[nextIndex]}
+          src={nextSrc}
           alt=""
           className="w-full h-full object-cover"
           style={{ filter: 'blur(3px) brightness(0.55) saturate(1.1)' }}
