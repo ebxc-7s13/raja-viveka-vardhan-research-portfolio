@@ -12,5 +12,9 @@ services:
         value: ./data/portfolio.db
       - key: JWT_SECRET
         generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@rajavivekavardhan.com
+      - key: ADMIN_PASSWORD
+        value: RajaViveka2026SecurePass!
       - key: NODE_VERSION
         value: 20.11.0
