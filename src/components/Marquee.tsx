@@ -31,7 +31,7 @@ export default function Marquee({ direction = 'left', sticky = false }: MarqueeP
         style={{
           display: 'inline-block',
           whiteSpace: 'nowrap',
-          animation: `${animName} 30s linear infinite`,
+          animation: `${animName} 80s linear infinite`,
         }}
       >
         <span
