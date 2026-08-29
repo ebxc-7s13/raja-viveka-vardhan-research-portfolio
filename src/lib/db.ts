@@ -27,13 +27,15 @@ export function getDb(): Database.Database {
         const userCount = (_db.prepare('SELECT COUNT(*) as count FROM users').get() as any).count;
         if (userCount === 0) {
           console.log('[db] Empty database detected — running seed...');
+          // Close connection before seed to avoid WAL lock conflicts
+          _db.close();
+          _db = null;
           execSync('npx tsx scripts/seed.ts', {
             cwd: process.cwd(),
-            timeout: 30000,
+            timeout: 60000,
             stdio: 'pipe',
           });
-          // Re-open the database after seed (seed drops/recreates tables)
-          _db.close();
+          // Re-open the database after seed
           _db = new Database(DB_PATH);
           _db.pragma('journal_mode = WAL');
           _db.pragma('foreign_keys = ON');
@@ -41,10 +43,16 @@ export function getDb(): Database.Database {
         }
       } catch (e) {
         console.error('[db] Auto-seed failed:', e);
+        // Ensure _db is open even if seed failed
+        if (!_db) {
+          _db = new Database(DB_PATH);
+          _db.pragma('journal_mode = WAL');
+          _db.pragma('foreign_keys = ON');
+        }
       }
     }
   }
-  return _db;
+  return _db!;
 }
 
 function initializeSchema(db: Database.Database) {

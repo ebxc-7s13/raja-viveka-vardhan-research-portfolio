@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeToggle />
         <Marquee direction="left" sticky />
         <Navigation />
-        <div className="pt-16 relative" style={{ zIndex: 2 }}>
+        <div className="pt-16 relative">
           {children}
           <Footer />
         </div>
