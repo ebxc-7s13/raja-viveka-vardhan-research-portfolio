@@ -575,6 +575,13 @@ body.blossom-mode footer,
 body.blossom-mode .bg-black {
   background-color: transparent !important;
 }
+
+/* Content must paint above the fixed wallpaper (z-0) and day overlay (z-1) */
+body.blossom-mode main,
+body.day-mode main {
+  position: relative;
+  z-index: 2;
+}
 body.blossom-mode main[class*="bg-slate"] {
   background-color: transparent !important;
 }

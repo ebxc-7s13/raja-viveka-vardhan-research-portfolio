@@ -12,11 +12,6 @@ function hexToRgb(hex: string) {
   return { r, g, b };
 }
 
-function isTouchDevice() {
-  if (typeof window === 'undefined') return false;
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
-
 export default function CursorTrail({ color }: { color: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointsRef = useRef<{ x: number; y: number }[]>([]);
@@ -24,7 +19,6 @@ export default function CursorTrail({ color }: { color: string }) {
   const mouseRef = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number>(0);
   const colorRef = useRef(color);
-  const isMobile = isTouchDevice();
 
   // Keep colorRef in sync
   useEffect(() => {
@@ -47,7 +41,13 @@ export default function CursorTrail({ color }: { color: string }) {
     const onMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
     };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
     window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
 
     const draw = () => {
       const { x: mx, y: my } = mouseRef.current;
@@ -131,12 +131,10 @@ export default function CursorTrail({ color }: { color: string }) {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('touchmove', onTouchMove);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
-
-  // Don't render canvas on touch devices
-  if (isMobile) return null;
 
   return (
     <canvas
