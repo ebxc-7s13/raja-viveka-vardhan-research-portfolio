@@ -3,7 +3,7 @@ services:
     name: raja-viveka-vardhan-portfolio
     runtime: node
     plan: free
-    buildCommand: npm install --include=dev && npm run build
+    buildCommand: npm install --include=dev && npm run build && npx tsx scripts/seed.ts
     startCommand: npm start
     envVars:
       - key: NODE_ENV

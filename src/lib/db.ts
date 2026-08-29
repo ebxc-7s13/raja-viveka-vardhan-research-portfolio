@@ -30,11 +30,12 @@ export function getDb(): Database.Database {
           // Close connection before seed to avoid WAL lock conflicts
           _db.close();
           _db = null;
-          execSync('npx tsx scripts/seed.ts', {
+          const result = execSync('npx tsx scripts/seed.ts', {
             cwd: process.cwd(),
             timeout: 60000,
-            stdio: 'pipe',
+            encoding: 'utf-8',
           });
+          console.log('[db] Seed output:', result);
           // Re-open the database after seed
           _db = new Database(DB_PATH);
           _db.pragma('journal_mode = WAL');
