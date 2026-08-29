@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
 
+const path = require('path');
+
 const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+    return config;
+  },
   headers: async () => [
     {
       source: '/(.*)',
