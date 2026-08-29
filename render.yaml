@@ -2,7 +2,6 @@ services:
   - type: web
     name: raja-viveka-vardhan-portfolio
     runtime: node
-    nodeVersion: 20.11.0
     plan: free
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -13,3 +12,5 @@ services:
         value: ./data/portfolio.db
       - key: JWT_SECRET
         generateValue: true
+      - key: NODE_VERSION
+        value: 20.11.0
