@@ -80,7 +80,7 @@ function MediaSection({ media, section }: { media: any[]; section: string }) {
             <div className="relative rounded-lg overflow-hidden border border-slate-800 bg-slate-900">
               <video
                 controls
-                preload="metadata"
+                preload="none"
                 className="w-full rounded-lg"
                 poster=""
               >
@@ -210,7 +210,7 @@ export default async function ResearchProjectPage({ params }: Props) {
                           <div className="rounded-lg overflow-hidden border border-slate-800 bg-slate-900">
                             <video
                               controls
-                              preload="metadata"
+                              preload="none"
                               className="w-full"
                             >
                               <source src={item.file_path} />

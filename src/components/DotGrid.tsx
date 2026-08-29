@@ -38,12 +38,20 @@ function distToShape(
   }
 }
 
+function getThemeColors(): { r: number; g: number; b: number } {
+  if (typeof document === 'undefined') return { r: 255, g: 255, b: 255 };
+  if (document.body.classList.contains('day-mode')) return { r: 26, g: 54, b: 93 };   // dark navy on light bg
+  if (document.body.classList.contains('blossom-mode')) return { r: 255, g: 220, b: 230 }; // soft pink
+  return { r: 255, g: 255, b: 255 }; // white on dark bg
+}
+
 export default function DotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
   const patchesRef = useRef<Patch[]>([]);
+  const colorRef = useRef(getThemeColors());
 
 
   useEffect(() => {
@@ -81,6 +89,11 @@ export default function DotGrid() {
     }
 
     patchesRef.current = makePatches();
+
+    // Re-check theme colors periodically (theme can change at runtime)
+    const colorInterval = setInterval(() => {
+      colorRef.current = getThemeColors();
+    }, 1000);
 
     function resize() {
       canvas!.width = window.innerWidth;
@@ -157,7 +170,8 @@ export default function DotGrid() {
 
           ctx.beginPath();
           ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          const { r: cr, g: cg, b: cb } = colorRef.current;
+          ctx.fillStyle = `rgba(${cr}, ${cg}, ${cb}, ${opacity})`;
           ctx.fill();
         }
       }
@@ -180,9 +194,10 @@ export default function DotGrid() {
 
             if (dist < MOUSE_RADIUS) {
               const factor = 1 - dist / MOUSE_RADIUS;
+              const { r: er, g: eg, b: eb } = colorRef.current;
               ctx.beginPath();
               ctx.arc(x, y, 0.6 + factor * 1.0, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(255, 255, 255, ${factor * 0.18})`;
+              ctx.fillStyle = `rgba(${er}, ${eg}, ${eb}, ${factor * 0.18})`;
               ctx.fill();
             }
           }
@@ -198,6 +213,7 @@ export default function DotGrid() {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouse);
+      clearInterval(colorInterval);
       cancelAnimationFrame(animRef.current);
     };
   }, []);
